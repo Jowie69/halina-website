@@ -229,42 +229,7 @@ footer {
   overflow: hidden;
 }
 .fx-flyby {
-  position: absolute;
-  top: 34px;
-  left: -90px;
-  width: 46px;
-  height: 46px;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-}
-.fx-flyby svg {
-  width: 100%;
-  height: 100%;
-  fill: rgba(242, 179, 61, 0.45);
-  filter: drop-shadow(0 6px 18px rgba(242, 179, 61, 0.3));
-}
-.fx-flyby.go {
-  animation: fx-fly 7s cubic-bezier(0.35, 0.05, 0.35, 1) 0.4s forwards;
-}
-@keyframes fx-fly {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 40px, 0) rotate(6deg) scale(0.7);
-  }
-  12% {
-    opacity: 1;
-  }
-  50% {
-    transform: translate3d(52vw, -18px, 0) rotate(-4deg) scale(1);
-  }
-  88% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(115vw, -70px, 0) rotate(-10deg) scale(0.82);
-  }
+  display: none !important;
 }
 
 /* ---------- respect the OS setting no matter what ---------- */

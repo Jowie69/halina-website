@@ -5,11 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="halina-logo.png" type="image/png">
 <meta name="theme-color" content="#5A1650">
-<title>Blog | Halina Travels</title>
-<meta name="description" content="Travel tips, UK destination guides and Filipino community stories from the Halina Travels blog.">
+<title>About Us | Halina Travels</title>
+<meta name="description" content="Welcome to Halina Travels — your professional and trusted partner for ticketing and travel experiences built around trust, convenience, flexibility, and customer care.">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/css/intro.css">
 <link rel="stylesheet" href="assets/css/enquiry.css">
+<style>
+.about-hero-lead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.about-hero-lead strong {
+  color: var(--maroon);
+  font-weight: 800;
+}
+.pillar-card {
+  background: #fff;
+  border: 1px solid var(--cream2);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: transform .25s, box-shadow .25s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pillar-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+.pillar-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--maroon), var(--plum));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+}
+.pillar-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+.pillar-title {
+  font-size: 19px;
+  color: var(--maroon);
+  font-weight: 800;
+}
+.pillar-desc {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.tagline-banner {
+  background: linear-gradient(135deg, var(--deep) 0%, var(--maroon) 55%, var(--plum) 100%);
+  color: #fff;
+  border-radius: 20px;
+  padding: 42px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(242,179,61,.25);
+  margin: 40px 0 20px;
+}
+.tagline-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px 240px at 50% 0, rgba(242,179,61,.3), transparent);
+  pointer-events: none;
+}
+.tagline-banner .script-text {
+  font-family: Georgia, "Playfair Display", "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 700;
+  color: #F2B33D;
+  font-size: clamp(26px, 4.5vw, 38px);
+  line-height: 1.25;
+  position: relative;
+  z-index: 1;
+  display: block;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.3px;
+}
+.tagline-banner p,
+.content-box .tagline-banner p {
+  color: #F8E6F5 !important;
+  font-size: 16.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 14px !important;
+  margin-bottom: 0 !important;
+  position: relative;
+  z-index: 1;
+  opacity: 1 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+.content-box {
+  background: #fff;
+  border: 1px solid var(--cream2);
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: var(--shadow);
+  margin-bottom: 40px;
+}
+.content-box p {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.content-box p:last-child {
+  margin-bottom: 0;
+}
+</style>
 </head>
 <body>
 
@@ -27,6 +141,7 @@
     </div>
   </div>
 </div>
+
 <header id="header">
   <div class="wrap nav">
     <a class="brand" href="index.html">
@@ -46,8 +161,8 @@
       <div class="drop"><a href="promo-black-friday.html">Promo <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="dropdown single"><a href="promo-black-friday.html">Black Friday &amp; Cyber Monday</a></div>
       </div>
-      <a href="about.html">About Us</a>
-      <div class="drop"><a href="blog.html" class="active">More <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
+      <a href="about.html" class="active">About Us</a>
+      <div class="drop"><a href="blog.html">More <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="dropdown single">
           <a href="about.html">About Us</a>
           <a href="travel-guide.html">Philippines Travel Guide</a>
@@ -77,71 +192,86 @@
     <a class="sub" href="blog.html">Blog</a>
   </div>
 </header>
-<div class="phero"><div class="wrap">
-  <div class="crumb"><a href="index.html">Home</a> › Blog</div>
-  <h1>The Halina Travels blog</h1>
-  <p class="lead">Kwentuhan corner — UK travel ideas for the Filipino community, Philippine trip planning and the events that bring us together.</p>
-  <div class="meta"><span class="chip">✈ Travel tips</span><span class="chip">🇬🇧 Filipino life in the UK</span><span class="chip">🏝 Must-visit hotspots</span></div>
-</div></div>
-<section class="sec"><div class="wrap">
-  <span class="eyebrow">Latest stories</span>
-  <h2 class="title">Fresh from the blog</h2>
-  <div class="grid g3"><div class="card">
-  <div class="banner b1"><b style="font-size:16px">Best Places to Visit in the UK: Top 20 UK Holiday Destinations for 2026</b></div>
-  <div class="pad">
-    <div class="postmeta"><span class="cat">Filipino Life in the UK</span><span>8 July 2026</span></div>
-    <p>From Stirling’s castle skyline to Dorset’s Jurassic Coast — our curated list of the UK breaks worth planning for 2026.</p>
-    <div class="cardfoot"><span style="color:var(--muted);font-size:13px;font-weight:700">12 min read</span>
-    <a class="golink" href="blog/best-top-20-uk-holiday-destinations.html">Read article <svg viewBox="0 0 24 24"><path d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a></div>
+
+<div class="phero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Home</a> › About Us</div>
+    <h1>About Us</h1>
+    <p class="lead">Your professional and trusted partner for ticketing and travel experiences.</p>
+    <div class="meta">
+      <span class="chip">🛡️ Built Around Trust</span>
+      <span class="chip">✨ Convenience &amp; Flexibility</span>
+      <span class="chip">❤️ Exceptional Customer Care</span>
+    </div>
   </div>
-</div><div class="card">
-  <div class="banner b2"><b style="font-size:16px">Everything You Need to Know About the 2026 British Grand Prix™</b></div>
-  <div class="pad">
-    <div class="postmeta"><span class="cat">Holiday Itineraries</span><span>6 June 2026</span></div>
-    <p>Silverstone, 3–6 July 2026 — dates, schedule, start times and how to plan your race weekend.</p>
-    <div class="cardfoot"><span style="color:var(--muted);font-size:13px;font-weight:700">8 min read</span>
-    <a class="golink" href="blog/2026-british-grand-prix.html">Read article <svg viewBox="0 0 24 24"><path d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a></div>
-  </div>
-</div><div class="card">
-  <div class="banner b3"><b style="font-size:16px">Philippine Independence Day in the UK 2026</b></div>
-  <div class="pad">
-    <div class="postmeta"><span class="cat">Filipino Life in the UK</span><span>5 June 2026</span></div>
-    <p>Barrio fiestas, OPM stages and lechon queues — where the Filipino community celebrates across Britain this summer.</p>
-    <div class="cardfoot"><span style="color:var(--muted);font-size:13px;font-weight:700">10 min read</span>
-    <a class="golink" href="blog/philippine-independence-day.html">Read article <svg viewBox="0 0 24 24"><path d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a></div>
-  </div>
-</div><div class="card">
-  <div class="banner b4"><b style="font-size:16px">50 UK Hidden Gems You Need to Visit</b></div>
-  <div class="pad">
-    <div class="postmeta"><span class="cat">Must Visit Hotspots</span><span>27 May 2026</span></div>
-    <p>Quiet coastal villages, castle trails and dark-sky moorlands — the underrated corners of Britain locals love.</p>
-    <div class="cardfoot"><span style="color:var(--muted);font-size:13px;font-weight:700">15 min read</span>
-    <a class="golink" href="blog/50-uk-hidden-gems.html">Read article <svg viewBox="0 0 24 24"><path d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a></div>
-  </div>
-</div><div class="card">
-  <div class="banner b5"><b style="font-size:16px">When is Spring in the UK 2026?</b></div>
-  <div class="pad">
-    <div class="postmeta"><span class="cat">Travel Tips</span><span>27 February 2026</span></div>
-    <p>Mark your calendar: spring 2026 dates, month-by-month weather and the best window to travel.</p>
-    <div class="cardfoot"><span style="color:var(--muted);font-size:13px;font-weight:700">7 min read</span>
-    <a class="golink" href="blog/when-is-spring-in-the-uk-2026.html">Read article <svg viewBox="0 0 24 24"><path d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a></div>
-  </div>
-</div><div class="card">
-  <div class="banner b1"><b style="font-size:16px">London in Winter 2026: Things to do in London in December</b></div>
-  <div class="pad">
-    <div class="postmeta"><span class="cat">Travel Tips</span><span>17 February 2026</span></div>
-    <p>Lights, ice rinks, pantos and mulled wine — the complete guide to the capital’s most magical month.</p>
-    <div class="cardfoot"><span style="color:var(--muted);font-size:13px;font-weight:700">9 min read</span>
-    <a class="golink" href="blog/things-to-do-in-london-in-december.html">Read article <svg viewBox="0 0 24 24"><path d="M4 11h12.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg></a></div>
-  </div>
-</div></div>
-  <div class="ctabox">
-  <div><h3>Ready to plan your trip?</h3>
-  <p>Talk to our Filipino travel specialists in London — flights, packages and balikbayan support, all in one place.</p></div>
-  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-gold" href="contact.html">GET A QUOTE</a>
-  <a class="btn btn-rose" href="tel:02079460958">CALL 020 7946 0958</a></div>
 </div>
-</div></section>
+
+<section class="sec">
+  <div class="wrap" style="max-width:920px">
+    
+    <div class="content-box">
+      <p class="about-hero-lead">
+        Welcome to Halina Travels, your professional and trusted partner for ticketing and travel experiences. We carefully assist you in finding cheap flight options that align with your preferred schedule, destination, and travel requirements. We take pride in delivering a service built around <strong>trust, convenience, flexibility, and customer care</strong>.
+      </p>
+
+      <div class="grid g4" style="margin: 32px 0;">
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          </div>
+          <div class="pillar-title">Trust</div>
+          <div class="pillar-desc">Transparent pricing and dependable service you can always count on.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          </div>
+          <div class="pillar-title">Convenience</div>
+          <div class="pillar-desc">Effortless booking tailored to your exact travel itinerary and preferences.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+          </div>
+          <div class="pillar-title">Flexibility</div>
+          <div class="pillar-desc">Custom flight routes and adaptable scheduling for every travel need.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <div class="pillar-title">Customer Care</div>
+          <div class="pillar-desc">Dedicated, personal assistance from enquiry until you land safely.</div>
+        </div>
+      </div>
+
+      <p>
+        Whether you're flying home for a luxury holiday with the family, planning a dream holiday, travelling for business, discovering a new destination, or last minute journey, our dedicated team is here to give their exceptional customer care to make your travel arrangements simple and stress-free.
+      </p>
+
+      <p>
+        Our goal is not simply to sell tickets, but we are committed to making your experience from the moment you make an enquiry to beginning of your journey as smooth, comfortable and enjoyable as possible the moment you reach your destination.
+      </p>
+
+      <div class="tagline-banner">
+        <span class="script-text">Now, Halina — “Come, let’s go!”</span>
+        <p>Come book and travel the world.</p>
+      </div>
+    </div>
+
+    <div class="ctabox">
+      <div>
+        <h3>Ready to book your next trip?</h3>
+        <p>Talk to our travel specialists in London — cheap flights, custom packages and dedicated customer care.</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-gold" href="contact.html">GET A QUOTE</a>
+        <a class="btn btn-rose" href="tel:02079460958">CALL 020 7946 0958</a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <footer>
   <div class="wrap foot">
@@ -158,11 +288,21 @@
     </div>
     <div>
       <h4>Important Links</h4>
-      <a href="index.html">» Home</a><a href="about.html">» About Us</a><a href="destinations.html">» Destinations</a><a href="holidays.html">» Holidays</a><a href="promo-black-friday.html">» Promos</a><a href="blog.html">» Blog</a><a href="contact.html">» Contact</a>
+      <a href="index.html">» Home</a>
+      <a href="about.html">» About Us</a>
+      <a href="destinations.html">» Destinations</a>
+      <a href="holidays.html">» Holidays</a>
+      <a href="promo-black-friday.html">» Promos</a>
+      <a href="blog.html">» Blog</a>
+      <a href="contact.html">» Contact</a>
     </div>
     <div>
       <h4>Our Services</h4>
-      <a href="index.html#offers">» Flight deals</a><a href="holidays.html">» Island packages</a><a href="contact.html">» Family reunions</a><a href="contact.html">» Balikbayan boxes</a><a href="contact.html">» Group bookings</a>
+      <a href="index.html#offers">» Flight deals</a>
+      <a href="holidays.html">» Island packages</a>
+      <a href="contact.html">» Family reunions</a>
+      <a href="contact.html">» Balikbayan boxes</a>
+      <a href="contact.html">» Group bookings</a>
     </div>
     <div class="contact">
       <h4>Get in Touch</h4>
@@ -176,6 +316,7 @@
     <span>Privacy Policy · Terms &amp; Conditions · Booking Conditions</span>
   </div>
 </footer>
+
 <script>
 (function(){
   var header=document.getElementById('header');
@@ -188,6 +329,5 @@
 <script src="assets/js/main.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
 <script src="assets/js/halina-config.js"></script>
-<script src="assets/js/halina-cms.js"></script>
 </body>
 </html>

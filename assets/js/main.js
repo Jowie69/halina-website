@@ -65,11 +65,23 @@
   }
 
   /* ---------------- intro ----------------
-     Runs immediately (not on idle) so the visitor never sees a
-     flash of the site before the overlay appears. If anything at
-     all goes wrong we just skip straight to the site.          */
+     Preloader runs ONLY on first load of session or when manually replayed.
+     In-between tab changes bypass the preloader completely for instant loading. */
   function bootIntro(overrideOpts) {
-    if (!capable()) {
+    var opts = Object.assign({
+      force: false
+    }, overrideOpts || {});
+
+    var alreadyPlayed = false;
+    try {
+      alreadyPlayed = sessionStorage.getItem('halina_intro_played') === 'true';
+    } catch (e) {}
+
+    if ((alreadyPlayed && !opts.force) || !capable()) {
+      document.documentElement.classList.remove('intro-lock');
+      var old = document.getElementById('intro');
+      if (old) old.remove();
+      body.setAttribute('data-intro', 'done');
       afterLoad(bootAmbient);
       return Promise.resolve();
     }
@@ -78,11 +90,6 @@
 
     var existing = document.getElementById('intro');
     if (existing) existing.remove();
-
-    var opts = Object.assign({
-      isFast: true,
-      rate: 4.8
-    }, overrideOpts || {});
 
     return import('./three/intro.js')
       .then(function (mod) {
@@ -97,12 +104,17 @@
         if (el) el.remove();
       })
       .then(function () {
+        try {
+          sessionStorage.setItem('halina_intro_played', 'true');
+        } catch (e) {}
         body.setAttribute('data-intro', 'done');
         afterLoad(bootAmbient);
       });
   }
 
-  window.replayIntro = bootIntro;
+  window.replayIntro = function () {
+    return bootIntro({ force: true });
+  };
   window.runIntro = bootIntro;
 
   bootIntro();
@@ -168,34 +180,34 @@
   style.textContent = `
     .bg-music-toggle {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 20px;
+      right: 20px;
       z-index: 999999;
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 18px;
+      gap: 7px;
+      padding: 6px 13px;
       background: rgba(60, 14, 56, 0.88);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(242, 179, 61, 0.5);
-      border-radius: 50px;
+      border-radius: 40px;
       color: #ffffff;
       font-family: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
-      font-size: 13px;
+      font-size: 11.5px;
       font-weight: 700;
       letter-spacing: 0.3px;
       cursor: pointer;
-      box-shadow: 0 8px 25px rgba(60, 14, 56, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 16px rgba(60, 14, 56, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       user-select: none;
       outline: none;
     }
     .bg-music-toggle:hover {
-      transform: translateY(-2px) scale(1.04);
+      transform: translateY(-2px) scale(1.03);
       background: rgba(90, 22, 80, 0.95);
       border-color: rgba(242, 179, 61, 0.9);
-      box-shadow: 0 12px 32px rgba(60, 14, 56, 0.5), 0 0 18px rgba(242, 179, 61, 0.35);
+      box-shadow: 0 8px 22px rgba(60, 14, 56, 0.5), 0 0 14px rgba(242, 179, 61, 0.35);
     }
     .bg-music-toggle:active {
       transform: translateY(0) scale(0.97);
@@ -204,8 +216,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
+      width: 22px;
+      height: 22px;
       background: rgba(242, 179, 61, 0.2);
       border-radius: 50%;
       color: #F2B33D;
@@ -218,12 +230,12 @@
     .bg-music-bars {
       display: inline-flex;
       align-items: flex-end;
-      gap: 2.5px;
-      height: 14px;
-      width: 14px;
+      gap: 2px;
+      height: 11px;
+      width: 11px;
     }
     .bg-music-bar {
-      width: 3px;
+      width: 2.5px;
       background-color: #F2B33D;
       border-radius: 2px;
       animation: soundwave 1.2s ease-in-out infinite alternate;
@@ -241,8 +253,8 @@
     }
     .bg-music-muted-icon {
       display: none;
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       fill: currentColor;
     }
     .bg-music-toggle.muted .bg-music-muted-icon {
@@ -257,10 +269,10 @@
     }
     @media (max-width: 600px) {
       .bg-music-toggle {
-        bottom: 16px;
-        right: 16px;
-        padding: 8px 14px;
-        font-size: 12px;
+        bottom: 14px;
+        right: 14px;
+        padding: 5px 10px;
+        font-size: 11px;
       }
     }
   `;

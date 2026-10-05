@@ -349,9 +349,9 @@ footer{background:#2A0827;color:#DFC3D8}
 .footbar{border-top:1px solid rgba(255,255,255,.1);padding:18px 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13px;opacity:.75}
 
 /* ---------- back to top / toast ---------- */
-#toTop{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--maroon));color:#fff;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(14px);transition:all .3s;z-index:950}
+#toTop{position:fixed;right:20px;bottom:64px;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--maroon));color:#fff;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(14px);transition:all .3s;z-index:950}
 #toTop.show{opacity:1;pointer-events:auto;transform:none}
-#toTop svg{width:18px;height:18px;fill:#fff}
+#toTop svg{width:16px;height:16px;fill:#fff}
 #toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(70px);background:var(--deep);color:#fff;padding:13px 22px;border-radius:12px;font-weight:700;font-size:14.5px;box-shadow:var(--shadow-lg);transition:transform .35s,opacity .35s,visibility .35s;z-index:960;display:flex;gap:10px;align-items:center;max-width:92vw;opacity:0;visibility:hidden}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
 #toast .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);flex:0 0 9px}
@@ -359,7 +359,8 @@ footer{background:#2A0827;color:#DFC3D8}
 /* ---------- responsive ---------- */
 @media (max-width:1020px){
   .menu,.callchip{display:none}
-  .hamburger{display:flex}
+  .brand span{display:none!important}
+  .hamburger{display:flex;flex:0 0 auto}
   .hero .wrap{grid-template-columns:1fr;padding-bottom:170px}
   .farecard{justify-self:start;max-width:420px}
   .fields{grid-template-columns:1fr 1fr}
@@ -378,8 +379,11 @@ footer{background:#2A0827;color:#DFC3D8}
 }
 @media (max-width:640px){
 .xmas .fine{position:static;display:block;padding:12px 18px 0;text-align:center}
-  .wrap{padding:0 18px}
-  .topbar .wrap{justify-content:center}
+  .wrap{padding:0 14px}
+  .nav .btn{padding:7px 11px;font-size:11.5px}
+  .hamburger{width:40px;height:40px}
+  .topbar .wrap{justify-content:center;padding:6px 10px;font-size:12px;gap:6px 10px;flex-wrap:wrap}
+  .topbar a,.topbar button{font-size:12px!important}
   .topbar .socials{display:none}
   .hero h1{font-size:37px}
   .hero .script{font-size:48px}
@@ -445,8 +449,10 @@ footer{background:#2A0827;color:#DFC3D8}
       <div class="drop"><a href="promo-black-friday.html">Promo <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="dropdown single"><a href="promo-black-friday.html">Black Friday &amp; Cyber Monday</a></div>
       </div>
+      <a href="about.html">About Us</a>
       <div class="drop"><a href="blog.html">More <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="dropdown single">
+          <a href="about.html">About Us</a>
           <a href="travel-guide.html">Philippines Travel Guide</a>
           <a href="social-proof.html">Social Proof</a>
           <a href="contact.html">Contact Us</a>
@@ -459,9 +465,9 @@ footer{background:#2A0827;color:#DFC3D8}
     <button class="hamburger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
   <div class="mobilemenu" id="mobilemenu">
-    <a href="#home">Home</a><a href="#offers">Flights</a><a href="destinations.html">Destinations</a><a href="holidays.html">Holidays</a><a href="airlines.html">Airlines</a><a href="promo-black-friday.html">Promo · Black Friday</a>
+    <a href="#home">Home</a><a href="#offers">Flights</a><a href="destinations.html">Destinations</a><a href="holidays.html">Holidays</a><a href="airlines.html">Airlines</a><a href="promo-black-friday.html">Promo · Black Friday</a><a href="about.html">About Us</a>
     <span class="mlabel">More</span>
-    <a class="sub" href="travel-guide.html">Philippines Travel Guide</a><a class="sub" href="social-proof.html">Social Proof</a><a class="sub" href="contact.html">Contact Us</a><a class="sub" href="blog.html">Blog</a>
+    <a class="sub" href="about.html">About Us</a><a class="sub" href="travel-guide.html">Philippines Travel Guide</a><a class="sub" href="social-proof.html">Social Proof</a><a class="sub" href="contact.html">Contact Us</a><a class="sub" href="blog.html">Blog</a>
     <a href="#contact">Get a Quote</a>
   </div>
 </header>
@@ -779,7 +785,7 @@ footer{background:#2A0827;color:#DFC3D8}
     </div>
     <div>
       <h4>Important Links</h4>
-      <a href="#home">» Home</a><a href="destinations.html">» Destinations</a><a href="holidays.html">» Holidays</a><a href="promo-black-friday.html">» Promos</a><a href="blog.html">» Blog</a><a href="contact.html">» Contact</a>
+      <a href="#home">» Home</a><a href="about.html">» About Us</a><a href="destinations.html">» Destinations</a><a href="holidays.html">» Holidays</a><a href="promo-black-friday.html">» Promos</a><a href="blog.html">» Blog</a><a href="contact.html">» Contact</a>
     </div>
     <div>
       <h4>Our Services</h4>

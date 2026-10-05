@@ -188,28 +188,7 @@
     airWrap.classList.add('fx-ring');
   }
 
-  /* ---------------------------------------------------------
-     8. Closing beat: paper plane flies across the footer
-     --------------------------------------------------------- */
-  var footer = document.querySelector('footer');
-  if (footer && !footer.querySelector('.fx-flyby')) {
-    var fly = document.createElement('div');
-    fly.className = 'fx-flyby';
-    fly.setAttribute('aria-hidden', 'true');
-    fly.innerHTML =
-      '<svg viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19v-2zm19.6-9.6c-.2-.8-1-1.3-1.8-1.1l-5.3 1.4-6.9-6.4-1.9.5 4.1 7.2-4.9 1.3-2-1.5-1.5.4 2.6 4.5s6.6-1.7 16.5-4.4c.9-.3 1.3-1.1 1.1-1.9z"/></svg>';
-    footer.insertBefore(fly, footer.firstChild);
-    if ('IntersectionObserver' in window) {
-      var flyIO = new IntersectionObserver(function (es) {
-        for (var i = 0; i < es.length; i++) {
-          if (es[i].isIntersecting) { fly.classList.add('go'); flyIO.disconnect(); }
-        }
-      }, { threshold: 0.25 });
-      flyIO.observe(footer);
-    } else {
-      fly.classList.add('go');
-    }
-  }
+
 
   /* ---------------------------------------------------------
      9. Tiny API for the 3D layer
