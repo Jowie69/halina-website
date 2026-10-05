@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="halina-logo.png" type="image/png">
 <link rel="apple-touch-icon" href="halina-logo.png">
-<meta name="theme-color" content="#5A1650">
+<meta name="theme-color" content="#E4002B">
 <link rel="stylesheet" href="assets/css/fx.css">
 <link rel="stylesheet" href="assets/css/intro.css">
 <link rel="stylesheet" href="assets/css/mascot.css">
@@ -24,13 +24,14 @@
 <meta name="description" content="Halina Travels — London's Filipino travel agency. Flights home, island packages, balikbayan support.">
 <style>
 :root{
-  --maroon:#5A1650; --deep:#3C0E38; --plum:#7C2470; --rose:#CE5587; --rose-deep:#AD3D6C;
-  --gold:#F2B33D; --gold-deep:#D99A1F; --cream:#FBF2F6; --cream2:#F3E3EC;
-  --ink:#2B2130; --muted:#7C6E78; --white:#fff; --max:1140px;
+  --maroon:#E4002B; --deep:#8E001A; --plum:#FF2A2A; --rose:#FF4D4D; --rose-deep:#C40022;
+  --gold:#FFB800; --gold-deep:#E69500; --cream:#FFF8F5; --cream2:#F7ECE6;
+  --ink:#1D1E22; --muted:#6C727F; --white:#fff; --max:1140px;
+  --teal:#00877A; --navy:#141824;
   --font:"Nunito","Segoe UI","Trebuchet MS",system-ui,-apple-system,Arial,sans-serif;
   --script:"Brush Script MT","Segoe Script",Georgia,cursive;
-  --shadow:0 1px 2px rgba(60,14,56,.06),0 10px 30px rgba(60,14,56,.10);
-  --shadow-lg:0 2px 6px rgba(60,14,56,.10),0 24px 60px rgba(60,14,56,.18);
+  --shadow:0 1px 3px rgba(228,0,43,.08),0 10px 30px rgba(24,28,40,.08);
+  --shadow-lg:0 4px 12px rgba(228,0,43,.14),0 24px 60px rgba(24,28,40,.18);
   --r:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -46,23 +47,23 @@ section{position:relative}
 #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--rose),var(--gold));z-index:1000;transition:width .1s linear}
 
 /* ---------- top utility bar ---------- */
-.topbar{background:var(--deep);color:#EBD6E6;font-size:13.5px}
+.topbar{background:var(--deep);color:#FFECEC;font-size:13.5px}
 .topbar .wrap{display:flex;justify-content:space-between;align-items:center;min-height:36px;gap:16px}
 .topbar a{display:inline-flex;align-items:center;gap:7px;opacity:.92}
 .topbar a:hover{opacity:1;color:#fff}
 .socials{display:flex;gap:6px}
-.socials a{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08)}
-.socials a:hover{background:var(--rose)}
-.socials svg{width:13px;height:13px;fill:#fff}
+.socials a{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12)}
+.socials a:hover{background:var(--gold);color:#3C2A05}
+.socials svg{width:13px;height:13px;fill:currentColor}
 
 /* ---------- header ---------- */
-header{position:sticky;top:0;z-index:900;background:#fff;box-shadow:0 1px 0 rgba(60,14,56,.08);transition:box-shadow .25s}
-header.scrolled{box-shadow:0 6px 24px rgba(60,14,56,.14)}
+header{position:sticky;top:0;z-index:900;background:#fff;box-shadow:0 1px 0 rgba(228,0,43,.08);transition:box-shadow .25s}
+header.scrolled{box-shadow:0 6px 24px rgba(228,0,43,.14)}
 .nav{display:flex;align-items:center;gap:12px;min-height:60px}
 .brand{display:flex;align-items:center;gap:9px;margin-right:auto;flex:0 0 auto}
 .brand .mark{width:36px;height:36px;flex:0 0 36px;object-fit:contain}
 .brand b{font-size:17px;color:var(--maroon);letter-spacing:.2px;line-height:1.05;display:block;white-space:nowrap}
-.brand small{display:block;font-family:var(--script);font-style:italic;color:var(--rose);font-size:11.5px;line-height:1.1;white-space:nowrap}
+.brand small{display:block;font-family:var(--script);font-style:italic;color:var(--rose-deep);font-size:11.5px;line-height:1.1;white-space:nowrap}
 .menu{display:flex;gap:1px;align-items:center}
 .menu a{padding:8px 8px;border-radius:8px;font-weight:700;font-size:13.5px;color:var(--ink);transition:background .2s,color .2s;white-space:nowrap}
 .menu a:hover,.menu a.active{background:var(--cream2);color:var(--maroon)}
@@ -78,6 +79,32 @@ header.scrolled{box-shadow:0 6px 24px rgba(60,14,56,.14)}
 .mobilemenu{max-height:70vh;overflow:auto}
 .mobilemenu a.sub{padding-left:26px;font-weight:700;color:var(--ink);font-size:14.5px}
 .mobilemenu .mlabel{display:block;padding:12px 10px 4px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:900}
+.nav-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--cream2, #F7ECE6);
+  color: var(--maroon, #E4002B);
+  border: 1px solid rgba(228, 0, 43, 0.15);
+  transition: all 0.2s ease;
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+.nav-icon-btn:hover {
+  background: var(--maroon, #E4002B);
+  color: #ffffff;
+  border-color: var(--maroon, #E4002B);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(228, 0, 43, 0.25);
+}
+.nav-icon-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
 .callchip{display:inline-flex;align-items:center;gap:7px;border:2px solid var(--maroon);color:var(--maroon);font-weight:800;border-radius:999px;padding:7px 12px;font-size:13px;transition:all .2s;white-space:nowrap;flex:0 0 auto}
 .callchip:hover{background:var(--cream)}
 .nav .btn{padding:9px 14px;font-size:12.5px;white-space:nowrap;flex:0 0 auto}
@@ -85,9 +112,9 @@ header.scrolled{box-shadow:0 6px 24px rgba(60,14,56,.14)}
 .btn:hover{transform:translateY(-2px)}
 .btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .5s}
 .btn:hover::after{left:130%}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#3C2A05;box-shadow:0 6px 18px rgba(242,179,61,.4)}
-.btn-maroon{background:linear-gradient(135deg,var(--plum),var(--maroon));color:#fff;box-shadow:0 6px 18px rgba(90,22,80,.35)}
-.btn-rose{background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;box-shadow:0 6px 18px rgba(206,85,135,.4)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#3C2A05;box-shadow:0 6px 18px rgba(255,184,0,.4)}
+.btn-maroon{background:linear-gradient(135deg,var(--plum),var(--maroon));color:#fff;box-shadow:0 6px 18px rgba(228,0,43,.35)}
+.btn-rose{background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;box-shadow:0 6px 18px rgba(196,0,34,.4)}
 .btn-ghost{border:2px solid rgba(255,255,255,.75);color:#fff}
 .btn-ghost:hover{background:rgba(255,255,255,.12)}
 .hamburger{display:none;width:44px;height:44px;border-radius:10px;background:var(--cream2);align-items:center;justify-content:center}
@@ -349,7 +376,7 @@ footer{background:#2A0827;color:#DFC3D8}
 .footbar{border-top:1px solid rgba(255,255,255,.1);padding:18px 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13px;opacity:.75}
 
 /* ---------- back to top / toast ---------- */
-#toTop{position:fixed;right:20px;bottom:64px;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--maroon));color:#fff;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(14px);transition:all .3s;z-index:950}
+#toTop{position:fixed;right:26px;bottom:138px;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--maroon));color:#fff;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(14px);transition:all .3s;z-index:950}
 #toTop.show{opacity:1;pointer-events:auto;transform:none}
 #toTop svg{width:16px;height:16px;fill:#fff}
 #toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(70px);background:var(--deep);color:#fff;padding:13px 22px;border-radius:12px;font-weight:700;font-size:14.5px;box-shadow:var(--shadow-lg);transition:transform .35s,opacity .35s,visibility .35s;z-index:960;display:flex;gap:10px;align-items:center;max-width:92vw;opacity:0;visibility:hidden}
@@ -499,7 +526,9 @@ footer{background:#2A0827;color:#DFC3D8}
         </div>
       </div>
     </nav>
-    <a class="callchip" href="tel:02079460958"><svg viewBox="0 0 24 24" width="15" height="15" fill="#5A1650"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg> 020 7946 0958</a>
+    <a class="callchip" href="tel:02079460958"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg> 020 7946 0958</a>
+    <a class="nav-icon-btn nav-call-btn" href="tel:02079460958" title="Call 020 7946 0958" aria-label="Call Us"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></a>
+    <a class="nav-icon-btn nav-email-btn" href="mailto:hello@halinatravels.co.uk" title="Email hello@halinatravels.co.uk" aria-label="Email Us"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
     <a class="btn btn-gold" href="#contact">GET A QUOTE</a>
     <button class="hamburger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
@@ -598,7 +627,7 @@ footer{background:#2A0827;color:#DFC3D8}
       <div class="floatbadge"><svg class="kic" style="fill:var(--maroon)" viewBox="0 0 24 24"><path d="M21.7 15.4l-8.6-4.3V4.9a1.35 1.35 0 10-2.7 0v6.2l-8.6 4.3v2.1l8.6-2.7v4.7l-2.4 1.6v1.5l3.8-1.1 3.8 1.1v-1.5l-2.4-1.6v-4.7l8.5 2.7v-2.1z"/></svg> 500+ flights booked monthly</div>
     </div>
     <div class="panel">
-      <h2><svg viewBox="0 0 48 48" width="30" height="30"><circle cx="24" cy="24" r="10" fill="#F2B33D"/><g stroke="#CE5587" stroke-width="3" stroke-linecap="round"><line x1="24" y1="5" x2="24" y2="11"/><line x1="24" y1="37" x2="24" y2="43"/><line x1="5" y1="24" x2="11" y2="24"/><line x1="37" y1="24" x2="43" y2="24"/></g></svg> The UK's Warmest Philippines Travel Agency</h2>
+      <h2><svg viewBox="0 0 48 48" width="30" height="30"><circle cx="24" cy="24" r="10" fill="#FFB800"/><g stroke="#FF4D4D" stroke-width="3" stroke-linecap="round"><line x1="24" y1="5" x2="24" y2="11"/><line x1="24" y1="37" x2="24" y2="43"/><line x1="5" y1="24" x2="11" y2="24"/><line x1="37" y1="24" x2="43" y2="24"/></g></svg> The UK's Warmest Philippines Travel Agency</h2>
       <p>'Halina' means 'come, let's go' — and that's exactly the welcome you'll get from our Filipino team in London. We take great pleasure in crafting the best flights and holidays to the stunning Philippines.</p>
       <p>Famously known as the 'Pearl of the Orient' and blessed with a treasure trove of natural wonders, the Philippines is made up of over 7,000 islands in the heart of Southeast Asia — with diverse wildlife, dazzling beaches and mouthwatering delicacies under a balmy tropical sky.</p>
       <p>From balikbayan homecomings to first-time island hops, we make every journey memorable, affordable and full value for your money. Kick-start your journey with London's friendliest Filipino travel studio.</p>
@@ -616,7 +645,7 @@ footer{background:#2A0827;color:#DFC3D8}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-title">
-        <svg class="sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#F2B33D"/><g stroke="#CE5587" stroke-width="3" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10" y1="10" x2="14" y2="14"/><line x1="34" y1="34" x2="38" y2="38"/><line x1="10" y1="38" x2="14" y2="34"/><line x1="34" y1="14" x2="38" y2="10"/></g></svg>
+        <svg class="sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#FFB800"/><g stroke="#FF4D4D" stroke-width="3" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10" y1="10" x2="14" y2="14"/><line x1="34" y1="34" x2="38" y2="38"/><line x1="10" y1="38" x2="14" y2="34"/><line x1="34" y1="14" x2="38" y2="10"/></g></svg>
         <div><h2>Best-Selling Flight Offers to the Philippines</h2><span class="underline"></span></div>
       </div>
     </div>
@@ -691,7 +720,7 @@ footer{background:#2A0827;color:#DFC3D8}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-title">
-        <svg class="sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#F2B33D"/><g stroke="#CE5587" stroke-width="3" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10" y1="10" x2="14" y2="14"/><line x1="34" y1="34" x2="38" y2="38"/><line x1="10" y1="38" x2="14" y2="34"/><line x1="34" y1="14" x2="38" y2="10"/></g></svg>
+        <svg class="sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#FFB800"/><g stroke="#FF4D4D" stroke-width="3" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10" y1="10" x2="14" y2="14"/><line x1="34" y1="34" x2="38" y2="38"/><line x1="10" y1="38" x2="14" y2="34"/><line x1="34" y1="14" x2="38" y2="10"/></g></svg>
         <div><h2>Popular Airlines Flying to the Philippines</h2><span class="underline"></span></div>
       </div>
     </div>
@@ -733,7 +762,7 @@ footer{background:#2A0827;color:#DFC3D8}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-title">
-        <svg class="sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#F2B33D"/><g stroke="#CE5587" stroke-width="3" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10" y1="10" x2="14" y2="14"/><line x1="34" y1="34" x2="38" y2="38"/><line x1="10" y1="38" x2="14" y2="34"/><line x1="34" y1="14" x2="38" y2="10"/></g></svg>
+        <svg class="sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#FFB800"/><g stroke="#FF4D4D" stroke-width="3" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10" y1="10" x2="14" y2="14"/><line x1="34" y1="34" x2="38" y2="38"/><line x1="10" y1="38" x2="14" y2="34"/><line x1="34" y1="14" x2="38" y2="10"/></g></svg>
         <div><h2>What Our Customers Say</h2><span class="underline"></span></div>
       </div>
     </div>
@@ -741,17 +770,17 @@ footer{background:#2A0827;color:#DFC3D8}
       <div class="rcard reveal">
         <div class="stars"><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i></div>
         <p>“Booked our whole family's Christmas homecoming to Manila. They found a fare £200 cheaper than anything online — sobrang galing!”</p>
-        <div class="who"><span class="av" style="background:#CE5587">MR</span><div><b>Maria R.</b><small>London · Flew to Manila</small></div></div>
+        <div class="who"><span class="av" style="background:#FF4D4D">MR</span><div><b>Maria R.</b><small>London · Flew to Manila</small></div></div>
       </div>
       <div class="rcard reveal d1">
         <div class="stars"><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i></div>
         <p>“Our El Nido package was seamless — flights, ferry, island hopping, everything sorted. The team replied on WhatsApp even at midnight.”</p>
-        <div class="who"><span class="av" style="background:#F2B33D;color:#3C2A05">JD</span><div><b>James D.</b><small>Manchester · Palawan package</small></div></div>
+        <div class="who"><span class="av" style="background:#FFB800;color:#3C2A05">JD</span><div><b>James D.</b><small>Manchester · Palawan package</small></div></div>
       </div>
       <div class="rcard reveal d2">
         <div class="stars"><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i><i><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg></i></div>
         <p>“First time flying my parents over from Cebu. Halina handled the dates, the balikbayan boxes, everything — salamat po talaga!”</p>
-        <div class="who"><span class="av" style="background:#5A1650">AC</span><div><b>Angel C.</b><small>Birmingham · Family reunion</small></div></div>
+        <div class="who"><span class="av" style="background:#E4002B">AC</span><div><b>Angel C.</b><small>Birmingham · Family reunion</small></div></div>
       </div>
     </div>
   </div>
@@ -762,7 +791,7 @@ footer{background:#2A0827;color:#DFC3D8}
   <div class="wrap">
     <div class="panel reveal">
       <div class="left">
-        <h2><svg viewBox="0 0 48 48" width="28" height="28"><circle cx="24" cy="24" r="10" fill="#F2B33D"/><g stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"><line x1="24" y1="5" x2="24" y2="11"/><line x1="24" y1="37" x2="24" y2="43"/><line x1="5" y1="24" x2="11" y2="24"/><line x1="37" y1="24" x2="43" y2="24"/></g></svg> Couldn't Find What You Were Looking For?</h2>
+        <h2><svg viewBox="0 0 48 48" width="28" height="28"><circle cx="24" cy="24" r="10" fill="#FFB800"/><g stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"><line x1="24" y1="5" x2="24" y2="11"/><line x1="24" y1="37" x2="24" y2="43"/><line x1="5" y1="24" x2="11" y2="24"/><line x1="37" y1="24" x2="43" y2="24"/></g></svg> Couldn't Find What You Were Looking For?</h2>
         <p>Call our team of Tagalog-speaking specialists and let them know what you need — bespoke routes, group bookings, balikbayan boxes and more.</p>
         <div class="ways">
           <div class="way"><small>Enquire now</small><button class="btn btn-ghost" data-toast="Quote request form would open here."><svg class="bic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.6 6.8l8.4 5.8 8.4-5.8"/></svg> Request a Quote</button></div>
@@ -780,7 +809,7 @@ footer{background:#2A0827;color:#DFC3D8}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-title">
-        <svg class="sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#F2B33D"/><g stroke="#CE5587" stroke-width="3" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10" y1="10" x2="14" y2="14"/><line x1="34" y1="34" x2="38" y2="38"/><line x1="10" y1="38" x2="14" y2="34"/><line x1="34" y1="14" x2="38" y2="10"/></g></svg>
+        <svg class="sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#FFB800"/><g stroke="#FF4D4D" stroke-width="3" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10" y1="10" x2="14" y2="14"/><line x1="34" y1="34" x2="38" y2="38"/><line x1="10" y1="38" x2="14" y2="34"/><line x1="34" y1="14" x2="38" y2="10"/></g></svg>
         <div><h2>Frequently Asked Questions</h2><span class="underline"></span></div>
       </div>
     </div>
@@ -818,7 +847,7 @@ footer{background:#2A0827;color:#DFC3D8}
       </div>
       <p>London's Filipino travel studio — flights home, island packages and balikbayan support, crafted with puso since 2011.</p>
       <div class="badge-award">
-        <svg width="34" height="34" viewBox="0 0 48 48"><circle cx="24" cy="20" r="13" fill="#F2B33D"/><path d="M24 13l2 4.1 4.5.6-3.3 3.1.8 4.4-4-2.1-4 2.1.8-4.4-3.3-3.1 4.5-.6z" fill="#5A1650"/><path d="M17 31l-3 12 10-6 10 6-3-12" fill="#CE5587"/></svg>
+        <svg width="34" height="34" viewBox="0 0 48 48"><circle cx="24" cy="20" r="13" fill="#FFB800"/><path d="M24 13l2 4.1 4.5.6-3.3 3.1.8 4.4-4-2.1-4 2.1.8-4.4-3.3-3.1 4.5-.6z" fill="#E4002B"/><path d="M17 31l-3 12 10-6 10 6-3-12" fill="#FF4D4D"/></svg>
         <span><b>British Travel Awards 2026</b><small>Finalist · Best to Southeast Asia</small></span>
       </div>
     </div>

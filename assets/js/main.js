@@ -175,68 +175,95 @@
   window.addEventListener('beforeunload', saveAudioState);
   window.addEventListener('pagehide', saveAudioState);
 
-  // Inject Styles for Mute/Unmute Floating Button
+  // Inject Styles for Floating Controls (Round Facebook Chat Button & Round Music Button)
   var style = document.createElement('style');
   style.textContent = `
-    .bg-music-toggle {
+    .halina-chat-toggle {
       position: fixed;
       bottom: 20px;
       right: 20px;
       z-index: 999999;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #0084FF;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      box-shadow: 0 6px 22px rgba(122, 12, 30, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
-      gap: 7px;
-      padding: 6px 13px;
-      background: rgba(60, 14, 56, 0.88);
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      outline: none;
+      text-decoration: none;
+    }
+    .halina-chat-toggle:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 10px 28px rgba(122, 12, 30, 0.38), 0 0 18px rgba(245, 158, 11, 0.4);
+      background: #ffffff;
+    }
+    .halina-chat-toggle:active {
+      transform: translateY(0) scale(0.95);
+    }
+    .halina-chat-icon {
+      width: 28px;
+      height: 28px;
+      fill: #0084FF;
+    }
+
+    .bg-music-toggle {
+      position: fixed;
+      bottom: 86px;
+      right: 26px;
+      z-index: 999999;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: rgba(122, 12, 30, 0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(242, 179, 61, 0.5);
-      border-radius: 40px;
+      border: 1px solid rgba(245, 158, 11, 0.6);
       color: #ffffff;
-      font-family: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(60, 14, 56, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 16px rgba(122, 12, 30, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       user-select: none;
       outline: none;
     }
     .bg-music-toggle:hover {
-      transform: translateY(-2px) scale(1.03);
-      background: rgba(90, 22, 80, 0.95);
-      border-color: rgba(242, 179, 61, 0.9);
-      box-shadow: 0 8px 22px rgba(60, 14, 56, 0.5), 0 0 14px rgba(242, 179, 61, 0.35);
+      transform: translateY(-2px) scale(1.08);
+      background: rgba(200, 16, 46, 0.95);
+      border-color: rgba(245, 158, 11, 0.9);
+      box-shadow: 0 8px 22px rgba(122, 12, 30, 0.5), 0 0 14px rgba(245, 158, 11, 0.35);
     }
     .bg-music-toggle:active {
-      transform: translateY(0) scale(0.97);
+      transform: translateY(0) scale(0.95);
+    }
+    .bg-music-toggle .bg-music-label {
+      display: none !important;
     }
     .bg-music-icon-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 22px;
-      height: 22px;
-      background: rgba(242, 179, 61, 0.2);
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      color: #F2B33D;
-      transition: background 0.3s, color 0.3s;
-    }
-    .bg-music-toggle.muted .bg-music-icon-wrapper {
-      background: rgba(255, 255, 255, 0.12);
-      color: #A0939C;
     }
     .bg-music-bars {
       display: inline-flex;
       align-items: flex-end;
-      gap: 2px;
-      height: 11px;
-      width: 11px;
+      gap: 2.5px;
+      height: 14px;
     }
     .bg-music-bar {
       width: 2.5px;
-      background-color: #F2B33D;
+      background-color: #F59E0B;
       border-radius: 2px;
       animation: soundwave 1.2s ease-in-out infinite alternate;
     }
@@ -246,19 +273,17 @@
     .bg-music-toggle.muted .bg-music-bar {
       animation: none !important;
       height: 2px !important;
-      background-color: #A0939C !important;
-    }
-    .bg-music-toggle.muted .bg-music-bars {
-      align-items: center;
+      background-color: #D6A874 !important;
     }
     .bg-music-muted-icon {
       display: none;
-      width: 12px;
-      height: 12px;
-      fill: currentColor;
+      width: 18px;
+      height: 18px;
+      fill: #F59E0B;
     }
     .bg-music-toggle.muted .bg-music-muted-icon {
       display: block;
+      fill: #D6A874;
     }
     .bg-music-toggle.muted .bg-music-bars {
       display: none;
@@ -268,11 +293,21 @@
       100% { height: 100%; }
     }
     @media (max-width: 600px) {
-      .bg-music-toggle {
+      .halina-chat-toggle {
         bottom: 14px;
         right: 14px;
-        padding: 5px 10px;
-        font-size: 11px;
+        width: 50px;
+        height: 50px;
+      }
+      .halina-chat-icon {
+        width: 25px;
+        height: 25px;
+      }
+      .bg-music-toggle {
+        bottom: 72px;
+        right: 19px;
+        width: 40px;
+        height: 40px;
       }
     }
   `;
@@ -282,6 +317,7 @@
   var btn = document.createElement('button');
   btn.className = 'bg-music-toggle' + (audio.muted ? ' muted' : '');
   btn.setAttribute('aria-label', 'Toggle background music');
+  btn.setAttribute('title', 'Toggle background music');
   btn.setAttribute('type', 'button');
 
   btn.innerHTML = `
@@ -329,17 +365,65 @@
     }
   });
 
-  function appendButton() {
+  // Create Round Floating Facebook Chat Link
+  var chatBtn = document.createElement('a');
+  chatBtn.id = 'halinaChatBtn';
+  chatBtn.className = 'halina-chat-toggle';
+  chatBtn.href = 'https://www.facebook.com/';
+  chatBtn.target = '_blank';
+  chatBtn.rel = 'noopener noreferrer';
+  chatBtn.setAttribute('aria-label', 'Chat with us on Facebook');
+  chatBtn.setAttribute('title', 'Chat with us on Facebook');
+  chatBtn.innerHTML = `
+    <svg class="halina-chat-icon" viewBox="0 0 24 24">
+      <path fill="#0084FF" d="M12 2C6.477 2 2 6.145 2 11.258c0 2.91 1.455 5.513 3.734 7.224V22l3.432-1.884c.915.253 1.885.39 2.834.39 5.523 0 10-4.145 10-9.248C22 6.145 17.523 2 12 2zm1.042 12.433l-2.584-2.756-5.042 2.756 5.542-5.889 2.646 2.756 4.98-2.756-5.542 5.889z"/>
+    </svg>
+  `;
+
+  function appendFloatingControls() {
     if (!document.getElementById('bgMusicBtn')) {
       btn.id = 'bgMusicBtn';
       document.body.appendChild(btn);
     }
+    if (!document.getElementById('halinaChatBtn')) {
+      document.body.appendChild(chatBtn);
+    }
+    ensureNavbarIconButtons();
+  }
+
+  function ensureNavbarIconButtons() {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    if (!nav.querySelector('.nav-call-btn')) {
+      var callBtn = document.createElement('a');
+      callBtn.className = 'nav-icon-btn nav-call-btn';
+      callBtn.href = 'tel:02079460958';
+      callBtn.title = 'Call 020 7946 0958';
+      callBtn.setAttribute('aria-label', 'Call Us');
+      callBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>';
+      
+      var quoteBtn = nav.querySelector('.btn') || nav.querySelector('.hamburger');
+      if (quoteBtn) nav.insertBefore(callBtn, quoteBtn);
+      else nav.appendChild(callBtn);
+    }
+    if (!nav.querySelector('.nav-email-btn')) {
+      var emailBtn = document.createElement('a');
+      emailBtn.className = 'nav-icon-btn nav-email-btn';
+      emailBtn.href = 'mailto:hello@halinatravels.co.uk';
+      emailBtn.title = 'Email hello@halinatravels.co.uk';
+      emailBtn.setAttribute('aria-label', 'Email Us');
+      emailBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>';
+
+      var quoteBtn = nav.querySelector('.btn') || nav.querySelector('.hamburger');
+      if (quoteBtn) nav.insertBefore(emailBtn, quoteBtn);
+      else nav.appendChild(emailBtn);
+    }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', appendButton);
+    document.addEventListener('DOMContentLoaded', appendFloatingControls);
   } else {
-    appendButton();
+    appendFloatingControls();
   }
 
   // Autoplay attempt

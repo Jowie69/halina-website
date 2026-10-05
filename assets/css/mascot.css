@@ -91,24 +91,24 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--gold, #f2b33d);
+  background: var(--gold, #FFB800);
   border: 2px solid #fff;
-  box-shadow: 0 0 8px var(--gold, #f2b33d);
+  box-shadow: 0 0 8px var(--gold, #FFB800);
   z-index: 10;
 }
 
 /* ---------- Chat Panel ---------- */
 .mascot-chat {
   position: fixed;
-  left: 20px;
-  bottom: 145px;
+  right: 20px;
+  bottom: 84px;
   width: 350px;
   max-width: calc(100vw - 40px);
   max-height: 520px;
   height: calc(100vh - 180px);
   background: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 16px 40px rgba(60, 14, 56, 0.28), 0 0 0 1px rgba(90, 22, 80, 0.12);
+  box-shadow: 0 16px 40px rgba(228, 0, 43, 0.28), 0 0 0 1px rgba(228, 0, 43, 0.12);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -126,7 +126,7 @@
 }
 
 .mascot-chat-head {
-  background: linear-gradient(135deg, var(--maroon, #5a1650), var(--deep, #3c0e38));
+  background: linear-gradient(135deg, var(--maroon, #E4002B), var(--deep, #8E001A));
   color: #fff;
   padding: 14px 18px;
   display: flex;
@@ -141,7 +141,7 @@
 .mascot-chat-who {
   font-weight: 800;
   font-size: 15px;
-  color: var(--gold, #f2b33d);
+  color: var(--gold, #FFB800);
 }
 
 .mascot-chat-sub {
@@ -175,7 +175,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: var(--cream, #fbf2f6);
+  background: var(--cream, #FFF8F5);
 }
 
 .mascot-msg {
@@ -188,14 +188,14 @@
 
 .mascot-msg.bot {
   background: #fff;
-  color: var(--ink, #2b2130);
+  color: var(--ink, #1D1E22);
   border-bottom-left-radius: 4px;
-  box-shadow: 0 2px 8px rgba(60, 14, 56, 0.06);
-  border: 1px solid var(--cream2, #f3e3ec);
+  box-shadow: 0 2px 8px rgba(228, 0, 43, 0.06);
+  border: 1px solid var(--cream2, #F7ECE6);
 }
 
 .mascot-msg.user {
-  background: linear-gradient(135deg, var(--rose, #ce5587), var(--rose-deep, #ad3d6c));
+  background: linear-gradient(135deg, var(--rose, #FF4D4D), var(--rose-deep, #C40022));
   color: #fff;
   align-self: flex-end;
   border-bottom-right-radius: 4px;
@@ -207,13 +207,13 @@
   gap: 6px;
   overflow-x: auto;
   background: #fff;
-  border-top: 1px solid var(--cream2, #f3e3ec);
+  border-top: 1px solid var(--cream2, #F7ECE6);
 }
 
 .mascot-chip {
-  background: var(--cream, #fbf2f6);
-  color: var(--maroon, #5a1650);
-  border: 1px solid var(--cream2, #f3e3ec);
+  background: var(--cream, #FFF8F5);
+  color: var(--maroon, #E4002B);
+  border: 1px solid var(--cream2, #F7ECE6);
   padding: 5px 11px;
   border-radius: 999px;
   font-size: 11.5px;
@@ -224,7 +224,7 @@
 }
 
 .mascot-chip:hover {
-  background: var(--maroon, #5a1650);
+  background: var(--maroon, #E4002B);
   color: #fff;
 }
 
@@ -232,23 +232,23 @@
   display: flex;
   padding: 10px 14px;
   background: #fff;
-  border-top: 1px solid var(--cream2, #f3e3ec);
+  border-top: 1px solid var(--cream2, #F7ECE6);
   gap: 8px;
 }
 
 .mascot-form input {
   flex: 1;
-  border: 1px solid var(--cream2, #f3e3ec);
+  border: 1px solid var(--cream2, #F7ECE6);
   border-radius: 20px;
   padding: 8px 14px;
   font-family: inherit;
   font-size: 13.5px;
   outline: none;
-  background: var(--cream, #fbf2f6);
+  background: var(--cream, #FFF8F5);
 }
 
 .mascot-form input:focus {
-  border-color: var(--rose, #ce5587);
+  border-color: var(--rose, #FF4D4D);
   background: #fff;
 }
 
@@ -256,7 +256,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--rose, #ce5587), var(--maroon, #5a1650));
+  background: linear-gradient(135deg, var(--rose, #FF4D4D), var(--maroon, #E4002B));
   color: #fff;
   border: none;
   display: flex;
@@ -275,8 +275,9 @@
     height: 90px;
   }
   .mascot-chat {
-    left: 10px;
-    bottom: 105px;
+    right: 10px;
+    left: auto;
+    bottom: 74px;
     width: calc(100vw - 20px);
     height: 440px;
   }

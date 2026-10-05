@@ -14,7 +14,7 @@ html.intro-lock body {
   overflow: hidden;
   opacity: 0;
   transition: opacity 0.5s ease;
-  background: #3c0e38;
+  background: #8E001A;
 }
 #intro.live {
   opacity: 1;
@@ -25,9 +25,9 @@ html.intro-lock body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 80% at 78% 22%, rgba(242, 179, 61, 0.55), transparent 58%),
-    radial-gradient(90% 70% at 22% 78%, rgba(206, 85, 135, 0.45), transparent 62%),
-    linear-gradient(170deg, #5a1650 0%, #7c2470 42%, #ad3d6c 74%, #f2b33d 130%);
+    radial-gradient(120% 80% at 78% 22%, rgba(255, 184, 0, 0.55), transparent 58%),
+    radial-gradient(90% 70% at 22% 78%, rgba(255, 77, 77, 0.45), transparent 62%),
+    linear-gradient(170deg, #8E001A 0%, #E4002B 42%, #FF2A2A 74%, #FFB800 130%);
   animation: intro-bloom 4.2s ease-out both;
 }
 @keyframes intro-bloom {
@@ -126,7 +126,7 @@ html.intro-lock body {
 .intro-tag {
   font-family: var(--script, "Brush Script MT", Georgia, cursive);
   font-size: clamp(19px, 2.6vw, 34px);
-  color: #f2b33d;
+  color: #FFB800;
   margin-top: 10px;
 }
 
@@ -139,7 +139,7 @@ html.intro-lock body {
   padding: 11px 20px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.45);
-  background: rgba(40, 8, 38, 0.35);
+  background: rgba(142, 0, 26, 0.45);
   color: #fff;
   font: inherit;
   font-size: 14px;
@@ -150,8 +150,8 @@ html.intro-lock body {
 }
 .intro-skip:hover,
 .intro-skip:focus-visible {
-  background: rgba(40, 8, 38, 0.6);
-  border-color: #f2b33d;
+  background: rgba(142, 0, 26, 0.75);
+  border-color: #FFB800;
 }
 
 /* reveal */
