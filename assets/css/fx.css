@@ -1,0 +1,301 @@
+/* ============================================================
+   Halina Travels — experience layer (Phases 1–3)
+   Purely additive. Every rule is scoped to an fx-* class or a
+   canvas the JS creates, so the original design is untouched
+   when motion is off.
+   ============================================================ */
+
+/* ---------- global kill switch: <body data-motion="off"> ---------- */
+body[data-motion='off'] .fx-tilt,
+body[data-motion='off'] .fx-magnet,
+body[data-motion='off'] .fx-depth,
+body[data-motion='off'] [data-parallax] {
+  transform: none !important;
+}
+body[data-motion='off'] .fx-flyby,
+body[data-motion='off'] canvas.fx-canvas,
+body[data-motion='off'] .fx-fog {
+  display: none !important;
+}
+
+/* ---------- parallax primitive ---------- */
+[data-parallax] {
+  will-change: transform;
+  transform: translate3d(0, var(--py, 0px), 0);
+}
+.about .photo[data-parallax] {
+  background-position: center calc(50% + var(--py, 0px) * 1.6);
+  transform: none;
+}
+.xmas .poster .bgimg[data-parallax] {
+  top: -10%;
+  bottom: -10%;
+  transform: translate3d(0, var(--py, 0px), 0) scale(1.06);
+}
+
+/* ---------- 3D canvases ---------- */
+.hero {
+  perspective: 1200px;
+}
+canvas.fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+canvas.fx-canvas.ready {
+  opacity: 1;
+}
+#hero-fx {
+  z-index: 1;
+}
+.hero .veil {
+  z-index: 2;
+  /* a touch more contrast so hero copy stays legible over the 3D layer */
+  background: linear-gradient(
+    90deg,
+    rgba(40, 8, 38, 0.82) 0%,
+    rgba(40, 8, 38, 0.42) 45%,
+    rgba(40, 8, 38, 0.16) 100%
+  );
+}
+.hero .wrap {
+  z-index: 3;
+}
+#promo-fx {
+  z-index: 2;
+}
+.xmas .poster .inner {
+  z-index: 3;
+}
+
+/* foreground wisp the hero content scrolls “through” */
+.fx-fog {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -40px;
+  height: 210px;
+  z-index: 4;
+  pointer-events: none;
+  background: radial-gradient(60% 100% at 20% 100%, rgba(251, 242, 246, 0.5), transparent 70%),
+    radial-gradient(50% 100% at 70% 100%, rgba(206, 85, 135, 0.26), transparent 70%);
+  filter: blur(18px);
+  transform: translate3d(0, calc(var(--py, 0px) * -1.4), 0);
+  will-change: transform;
+}
+
+/* ---------- magnetic buttons ---------- */
+.fx-magnet {
+  transform: translate3d(var(--mx, 0), var(--my, 0), 0);
+  transition: box-shadow 0.25s ease, background 0.2s ease;
+  will-change: transform;
+}
+
+/* ---------- 3D card tilt ---------- */
+.fx-tilt {
+  transform-style: preserve-3d;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  will-change: transform;
+}
+.dcard.fx-tilt:hover {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-7px);
+}
+/* specular sheen that follows the cursor */
+.fx-tilt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    340px circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 255, 255, 0.2),
+    transparent 62%
+  );
+  z-index: 5;
+}
+.fx-tilt:hover::after {
+  opacity: 1;
+}
+#offers .grid > .fx-tilt,
+.why .grid > .fx-tilt,
+.reviews .grid > .fx-tilt,
+.farecard.fx-tilt {
+  position: relative;
+}
+
+/* ---------- destination map pin ---------- */
+.dcard {
+  transform-style: preserve-3d;
+}
+.fx-pin {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold, #f2b33d);
+  box-shadow: 0 10px 22px rgba(40, 8, 38, 0.45);
+  opacity: 0;
+  z-index: 6;
+  pointer-events: none;
+  transform: translate3d(0, -14px, 60px) scale(0.6);
+  transition: opacity 0.32s cubic-bezier(0.2, 0.8, 0.3, 1),
+    transform 0.42s cubic-bezier(0.2, 1.3, 0.35, 1);
+}
+.fx-pin svg {
+  width: 18px;
+  height: 18px;
+  fill: #3c2a05;
+}
+.dcard:hover .fx-pin,
+.dcard:focus-within .fx-pin {
+  opacity: 1;
+  transform: translate3d(0, 0, 60px) scale(1);
+}
+
+/* ---------- heading underline sweep ---------- */
+.fx-underline {
+  position: relative;
+}
+.fx-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  height: 4px;
+  width: 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--rose, #ce5587), var(--gold, #f2b33d));
+  transition: width 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) 0.15s;
+}
+.show .fx-underline::after,
+.fx-underline.show::after {
+  width: 72px;
+}
+
+/* ---------- reviews depth layering ---------- */
+.fx-depth {
+  transform: translate3d(0, calc(var(--depth, 0px) * -0.4), 0);
+}
+.reviews .grid > .fx-depth.fx-tilt {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    translateY(calc(var(--depth, 0px) * -0.4));
+}
+
+/* ---------- airlines marquee ----------
+   Keep the continuously translated row on one stable compositor layer.
+   Previously `.fx-ring > *:hover` scaled and pushed the ENTIRE animated
+   row toward the camera. That changed its hover hit-box every frame and
+   caused the visible flicker. Only individual cards lift now. */
+.fx-ring-stage {
+  perspective: none;
+}
+.fx-ring {
+  transform: none;
+  transform-style: flat;
+  contain: paint;
+}
+.fx-ring .row {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+.fx-ring .air {
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, box-shadow;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+.fx-ring .air:hover {
+  transform: translate3d(0, -5px, 0);
+  box-shadow: 0 2px 7px rgba(60,14,56,.10), 0 18px 36px rgba(60,14,56,.16);
+  filter: saturate(1.08);
+}
+
+/* ---------- footer fly-by ---------- */
+footer {
+  position: relative;
+  overflow: hidden;
+}
+.fx-flyby {
+  position: absolute;
+  top: 34px;
+  left: -90px;
+  width: 46px;
+  height: 46px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+.fx-flyby svg {
+  width: 100%;
+  height: 100%;
+  fill: rgba(242, 179, 61, 0.45);
+  filter: drop-shadow(0 6px 18px rgba(242, 179, 61, 0.3));
+}
+.fx-flyby.go {
+  animation: fx-fly 7s cubic-bezier(0.35, 0.05, 0.35, 1) 0.4s forwards;
+}
+@keyframes fx-fly {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0) rotate(6deg) scale(0.7);
+  }
+  12% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(52vw, -18px, 0) rotate(-4deg) scale(1);
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(115vw, -70px, 0) rotate(-10deg) scale(0.82);
+  }
+}
+
+/* ---------- respect the OS setting no matter what ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .fx-tilt,
+  .fx-magnet,
+  .fx-depth,
+  [data-parallax] {
+    transform: none !important;
+    transition: none !important;
+  }
+  .fx-flyby,
+  canvas.fx-canvas,
+  .fx-fog {
+    display: none !important;
+  }
+  .fx-underline::after {
+    width: 72px;
+    transition: none;
+  }
+}
+
+/* ---------- small screens: 3D off, 2D motion stays ---------- */
+@media (max-width: 860px) {
+  canvas.fx-canvas {
+    display: none;
+  }
+  .fx-ring {
+    transform: none;
+  }
+  .fx-fog {
+    height: 130px;
+  }
+}

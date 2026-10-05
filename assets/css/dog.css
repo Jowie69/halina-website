@@ -1,0 +1,326 @@
+/* ============================================================
+   Halina Travels — Buddy, the sprite-animated companion
+   Sheets are horizontal strips of 136x120 frames.
+   ============================================================ */
+
+:root {
+  --dog-w: 136px;
+  --dog-h: 120px;
+}
+
+#buddy {
+  position: fixed;
+  left: 18px;
+  bottom: 14px;
+  z-index: 900;
+  /* Sized to the sprite only. The bubble is absolutely positioned so it
+     never reserves layout width across the flight-search inputs. */
+  width: var(--dog-w);
+  height: var(--dog-h);
+  pointer-events: none;
+}
+
+/* ---------- the dog ---------- */
+.buddy-dog {
+  position: relative;
+  width: var(--dog-w);
+  height: var(--dog-h);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  image-rendering: -webkit-optimize-contrast;
+  cursor: pointer;
+  pointer-events: auto;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  transform-origin: 50% 100%;
+  transform: scaleX(-1); /* face into the page by default */
+  filter: drop-shadow(0 10px 14px rgba(60, 14, 56, 0.28));
+  transition: filter 0.25s ease;
+}
+.buddy-dog:focus-visible {
+  outline: 3px solid var(--gold, #f2b33d);
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+.buddy-dog.face-left {
+  transform: scaleX(1);
+}
+
+.buddy-dog.is-idle {
+  background-image: url("../dog/idle.webp");
+  animation: buddy-idle 1.1s steps(10) infinite;
+}
+.buddy-dog.is-walk {
+  background-image: url("../dog/walk.webp");
+  animation: buddy-walk 0.72s steps(10) infinite;
+}
+.buddy-dog.is-jump {
+  background-image: url("../dog/jump.webp");
+  animation: buddy-jump 0.62s steps(8) 1;
+}
+.buddy-dog.is-slide {
+  background-image: url("../dog/slide.webp");
+  animation: buddy-slide 0.9s steps(10) 1;
+}
+.buddy-dog.is-hurt {
+  background-image: url("../dog/hurt.webp");
+  animation: buddy-hurt 0.95s steps(10) 1;
+}
+
+@keyframes buddy-idle  { from { background-position: 0 0; } to { background-position: -1360px 0; } }
+@keyframes buddy-walk  { from { background-position: 0 0; } to { background-position: -1360px 0; } }
+@keyframes buddy-jump  { from { background-position: 0 0; } to { background-position: -1088px 0; } }
+@keyframes buddy-slide { from { background-position: 0 0; } to { background-position: -1360px 0; } }
+@keyframes buddy-hurt  { from { background-position: 0 0; } to { background-position: -1360px 0; } }
+
+/* nudge notification */
+.buddy-badge {
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--gold, #f2b33d);
+  border: 2px solid #fff;
+  box-shadow: 0 3px 8px rgba(60, 14, 56, 0.35);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.buddy-badge.on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- speech bubble ---------- */
+.buddy-bubble {
+  position: absolute;
+  bottom: calc(100% - 6px);
+  left: 4px;
+  width: 200px;
+  padding: 10px 14px;
+  border-radius: 16px 16px 16px 4px;
+  background: #fff;
+  color: var(--ink, #2b2130);
+  font-size: 14px;
+  line-height: 1.45;
+  box-shadow: 0 2px 6px rgba(60, 14, 56, 0.1), 0 18px 40px rgba(60, 14, 56, 0.16);
+  opacity: 0;
+  transform: translateY(8px) scale(0.94);
+  transform-origin: 0 100%;
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.2, 1.2, 0.35, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+.buddy-bubble.on {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- chat panel ---------- */
+.buddy-chat {
+  position: fixed;
+  left: 18px;
+  bottom: 148px;
+  width: min(370px, calc(100vw - 36px));
+  max-height: min(560px, calc(100vh - 190px));
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 901;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(60, 14, 56, 0.1), 0 30px 70px rgba(60, 14, 56, 0.28);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(14px) scale(0.97);
+  transform-origin: 0 100%;
+  transition: opacity 0.25s ease, transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.buddy-chat.mounted { display: flex; }
+.buddy-chat.open { opacity: 1; transform: none; }
+
+.buddy-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px 14px 16px;
+  background: linear-gradient(120deg, var(--maroon, #5a1650), var(--plum, #7c2470));
+  color: #fff;
+}
+.buddy-head .who { font-weight: 800; font-size: 15px; line-height: 1.2; }
+.buddy-head .sub { font-size: 12px; opacity: 0.82; }
+.buddy-head .paw {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 17px;
+}
+.buddy-close {
+  margin-left: auto;
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+}
+.buddy-close:hover,
+.buddy-close:focus-visible { background: rgba(255, 255, 255, 0.3); }
+
+.buddy-log {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 16px 14px 6px;
+  background: var(--cream, #fbf2f6);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+.buddy-msg {
+  max-width: 84%;
+  padding: 10px 13px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 15px;
+  animation: buddy-pop 0.32s cubic-bezier(0.2, 1.1, 0.35, 1) both;
+}
+@keyframes buddy-pop {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: none; }
+}
+.buddy-msg.bot {
+  align-self: flex-start;
+  background: #fff;
+  color: var(--ink, #2b2130);
+  border-bottom-left-radius: 5px;
+  box-shadow: 0 1px 2px rgba(60, 14, 56, 0.06), 0 8px 18px rgba(60, 14, 56, 0.07);
+}
+.buddy-msg.me {
+  align-self: flex-end;
+  background: var(--rose-deep, #ad3d6c);
+  color: #fff;
+  border-bottom-right-radius: 5px;
+}
+.buddy-msg a { color: inherit; font-weight: 700; }
+.buddy-msg.bot a { color: var(--rose-deep, #ad3d6c); }
+.buddy-msg b { font-weight: 800; }
+
+.buddy-typing { display: inline-flex; gap: 4px; padding: 3px 0; }
+.buddy-typing i {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--rose, #ce5587);
+  animation: buddy-dots 1s infinite ease-in-out;
+}
+.buddy-typing i:nth-child(2) { animation-delay: 0.16s; }
+.buddy-typing i:nth-child(3) { animation-delay: 0.32s; }
+@keyframes buddy-dots {
+  0%, 60%, 100% { opacity: 0.28; transform: translateY(0); }
+  30%           { opacity: 1; transform: translateY(-4px); }
+}
+
+.buddy-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 10px 14px 12px;
+  background: var(--cream, #fbf2f6);
+  border-top: 1px solid var(--cream2, #f3e3ec);
+}
+.buddy-chip {
+  border: 1px solid var(--cream2, #f3e3ec);
+  background: #fff;
+  color: var(--maroon, #5a1650);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+.buddy-chip:hover,
+.buddy-chip:focus-visible {
+  background: var(--rose, #ce5587);
+  border-color: var(--rose, #ce5587);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.buddy-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  background: #fff;
+  border-top: 1px solid var(--cream2, #f3e3ec);
+}
+.buddy-form input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  padding: 11px 14px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink, #2b2130);
+  border: 1px solid var(--cream2, #f3e3ec);
+  border-radius: 999px;
+  background: var(--cream, #fbf2f6);
+}
+.buddy-form input:focus {
+  outline: none;
+  border-color: var(--rose, #ce5587);
+  box-shadow: 0 0 0 3px rgba(206, 85, 135, 0.16);
+}
+.buddy-send {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gold, #f2b33d);
+  color: #3c2a05;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+.buddy-send:hover,
+.buddy-send:focus-visible { background: var(--gold-deep, #d99a1f); transform: translateY(-1px); }
+.buddy-send svg { width: 19px; height: 19px; fill: currentColor; }
+
+/* keep clear of the back-to-top button on small screens */
+@media (max-width: 620px) {
+  :root { --dog-w: 102px; --dog-h: 90px; }
+  .buddy-dog.is-idle,
+  .buddy-dog.is-walk,
+  .buddy-dog.is-slide,
+  .buddy-dog.is-hurt { background-size: 1020px 90px; }
+  .buddy-dog.is-jump { background-size: 816px 90px; }
+  @keyframes buddy-idle  { from { background-position: 0 0; } to { background-position: -1020px 0; } }
+  @keyframes buddy-walk  { from { background-position: 0 0; } to { background-position: -1020px 0; } }
+  @keyframes buddy-jump  { from { background-position: 0 0; } to { background-position: -816px 0; } }
+  @keyframes buddy-slide { from { background-position: 0 0; } to { background-position: -1020px 0; } }
+  @keyframes buddy-hurt  { from { background-position: 0 0; } to { background-position: -1020px 0; } }
+  .buddy-bubble { display: none; }
+  .buddy-chat { bottom: 118px; left: 12px; }
+  #buddy { left: 10px; bottom: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buddy-dog { animation: none !important; }
+  .buddy-msg { animation: none !important; }
+  .buddy-typing i { animation: none !important; opacity: 0.6 !important; }
+  .buddy-chat { transition: none; }
+}

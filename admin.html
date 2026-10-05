@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halina Travels — Admin Console</title>
+<link rel="icon" href="halina-logo.png" type="image/png">
+<link rel="stylesheet" href="assets/css/admin-database.css">
+<link rel="stylesheet" href="assets/css/intro.css">
+<style>
+:root{
+  --ink:#2C2C2B; --muted:#7D7A75; --canvas:#fff; --soft:#F9F8F7; --soft2:#F0EFED;
+  --line:#E6E5E3; --accent:#2783DE; --accent-soft:#E5F2FC;
+  --green:#46A171; --green-soft:#E8F1EC; --orange:#D5803B; --orange-soft:#FBEBDE;
+  --red:#E56458; --red-soft:#FCE9E7; --brand:#5A1650; --brand2:#CE5587;
+  --r:8px; --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --sh:0 1px 2px rgba(0,0,0,.05),0 4px 12px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);background:var(--soft);overflow:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none}
+
+/* ---------- login ---------- */
+#login{position:fixed;inset:0;z-index:9000;display:grid;place-items:center;background:linear-gradient(160deg,#3C0E38,#5A1650 55%,#7C2470)}
+#login .card{width:min(92vw,380px);background:#fff;border-radius:12px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,.28);text-align:center}
+#login img{width:56px;height:56px;object-fit:contain;margin:0 auto 12px}
+#login h1{font-size:20px;letter-spacing:-.01em}
+#login p{font-size:14px;color:var(--muted);margin-top:6px}
+#login input{width:100%;margin-top:20px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft)}
+#login input:focus{outline:2px solid var(--accent);outline-offset:1px;background:#fff}
+#login button{width:100%;margin-top:12px;padding:12px;border-radius:var(--r);background:var(--brand);color:#fff;font-weight:600;min-height:44px}
+#login button:hover{background:#4a1142}
+#login .err{color:var(--red);font-size:14px;margin-top:10px;min-height:20px}
+#login .hint{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* ---------- shell ---------- */
+#app{display:none;height:100%;grid-template-rows:56px 1fr;grid-template-columns:230px 1fr 320px;
+     grid-template-areas:"top top top" "side main insp"}
+#app.on{display:grid}
+
+.top{grid-area:top;display:flex;align-items:center;gap:12px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line)}
+.top .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+.top .brand img{width:28px;height:28px;object-fit:contain}
+.top .brand span{font-size:15px}
+.top .brand em{font-style:normal;font-size:11px;color:var(--muted);display:block;line-height:1.1;font-weight:500}
+.spacer{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:5px 10px;border-radius:999px;background:var(--soft2);color:var(--muted)}
+.pill.dirty{background:var(--orange-soft);color:#8a4d17}
+.pill.saved{background:var(--green-soft);color:#2c6a48}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;padding:0 14px;border-radius:var(--r);border:1px solid var(--line);background:#fff;font-size:14px;font-weight:500}
+.btn:hover{background:var(--soft)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#1f6fbd}
+.btn.danger{color:var(--red);border-color:#f0cdc9}
+.btn.danger:hover{background:var(--red-soft)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- sidebar ---------- */
+.side{grid-area:side;background:#fff;border-right:1px solid var(--line);overflow:auto;padding:16px 12px}
+.side h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:16px 8px 8px;font-weight:700}
+.side h3:first-child{margin-top:0}
+.pg{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:9px 10px;border-radius:var(--r);font-size:14px;min-height:38px;color:var(--ink)}
+.pg:hover{background:var(--soft)}
+.pg.active{background:var(--accent-soft);color:#1a5f9e;font-weight:600}
+.pg .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);flex:0 0 7px;visibility:hidden}
+.pg.mod .dot{visibility:visible}
+.pg .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ---------- main ---------- */
+.main{grid-area:main;position:relative;display:flex;flex-direction:column;background:var(--soft2);min-width:0}
+.bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.seg{display:flex;background:var(--soft2);border-radius:var(--r);padding:2px}
+.seg button{padding:6px 12px;border-radius:6px;font-size:13px;font-weight:500;color:var(--muted);min-height:32px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+.frame{flex:1;position:relative;overflow:hidden;padding:12px}
+#stage{width:100%;height:100%;border:1px solid var(--line);border-radius:10px;background:#fff;box-shadow:var(--sh);display:block;margin:0 auto;transition:max-width .2s}
+.frame.w-tablet #stage{max-width:820px}
+.frame.w-phone #stage{max-width:390px}
+#veil{position:absolute;inset:0;display:grid;place-items:center;background:rgba(249,248,247,.92);z-index:5;text-align:center;padding:24px}
+#veil.hide{display:none}
+#veil .msg{max-width:420px}
+#veil h2{font-size:17px;margin-bottom:8px}
+#veil p{font-size:14px;color:var(--muted);margin-bottom:16px}
+
+/* ---------- inspector ---------- */
+.insp{grid-area:insp;background:#fff;border-left:1px solid var(--line);overflow:auto;display:flex;flex-direction:column}
+.insp .tabs{display:flex;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}
+.insp .tabs button{flex:1;padding:12px 8px;font-size:13px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;min-height:44px}
+.insp .tabs button.on{color:var(--accent);border-bottom-color:var(--accent)}
+.pane{padding:16px;display:none}
+.pane.on{display:block}
+.empty{color:var(--muted);font-size:14px;text-align:center;padding:32px 8px}
+.empty svg{width:32px;height:32px;stroke:var(--line);fill:none;stroke-width:1.5;margin:0 auto 10px;display:block}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:.02em}
+.fld input[type=text],.fld input[type=url],.fld textarea,.fld select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft);font-size:14px}
+.fld textarea{min-height:110px;resize:vertical;line-height:1.5}
+.fld input:focus,.fld textarea:focus,.fld select:focus{outline:2px solid var(--accent);outline-offset:-1px;background:#fff}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--accent-soft);color:#1a5f9e;padding:3px 8px;border-radius:5px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row .btn{flex:1;min-width:88px}
+.thumb{width:100%;height:150px;object-fit:cover;border-radius:var(--r);border:1px solid var(--line);background:var(--soft2)}
+.hr{height:1px;background:var(--line);margin:16px 0}
+.note{font-size:12.5px;color:var(--muted);line-height:1.45}
+
+/* content list */
+.srch{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft);font-size:14px;margin-bottom:12px}
+.item{display:flex;gap:9px;align-items:flex-start;width:100%;text-align:left;padding:9px;border-radius:var(--r);border:1px solid transparent;margin-bottom:2px}
+.item:hover{background:var(--soft);border-color:var(--line)}
+.item .ic{width:26px;height:26px;flex:0 0 26px;border-radius:5px;display:grid;place-items:center;background:var(--soft2);font-size:11px;font-weight:700;color:var(--muted)}
+.item img.ic{object-fit:cover}
+.item .tx{flex:1;min-width:0}
+.item .tx b{display:block;font-size:13.5px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .tx small{font-size:11px;color:var(--muted)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:8000;display:none;place-items:center;background:rgba(44,44,43,.45);padding:24px}
+.modal.on{display:grid}
+.modal .box{background:#fff;border-radius:12px;width:min(94vw,520px);max-height:86vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.modal .hd{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.modal .hd h2{font-size:16px;flex:1}
+.modal .bd{padding:20px}
+.modal .ft{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end;background:var(--soft)}
+.drop{border:2px dashed var(--line);border-radius:10px;padding:24px;text-align:center;background:var(--soft);cursor:pointer}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop svg{width:26px;height:26px;stroke:var(--muted);fill:none;stroke-width:1.6;margin-bottom:8px}
+.drop p{font-size:14px;color:var(--muted)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-size:14px;z-index:9500;opacity:0;transition:.22s;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:1100px){
+  #app.on{grid-template-columns:190px 1fr;grid-template-areas:"top top" "side main"}
+  .insp{position:fixed;right:0;top:56px;bottom:0;width:300px;z-index:100;box-shadow:-8px 0 24px rgba(0,0,0,.08);transform:translateX(100%);transition:.2s}
+  .insp.open{transform:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <form class="card" id="loginForm">
+    <img src="halina-logo.png" alt="Halina Travels">
+    <h1>Admin Console</h1>
+    <p>Sign in to edit the Halina Travels website.</p>
+    <input type="password" id="pw" placeholder="Password" autocomplete="current-password" aria-label="Password">
+    <button type="submit">Sign in</button>
+    <div class="err" id="loginErr" role="alert"></div>
+    <div class="hint">Default password: <b>halina2026</b></div>
+  </form>
+</div>
+
+<div id="app">
+  <header class="top">
+    <div class="brand"><img src="halina-logo.png" alt=""><span>Halina Travels<em>Content admin</em></span></div>
+    <span class="pill" id="status">Ready</span>
+    <div class="spacer"></div>
+    <button class="btn" id="btnUndo" title="Undo last change"><svg viewBox="0 0 24 24"><path d="M3 10h11a5 5 0 0 1 0 10h-3"/><path d="M3 10l5-5M3 10l5 5"/></svg>Undo</button>
+    <button class="btn" id="btnRevert">Revert page</button>
+    <button class="btn" id="btnSave"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Save draft</button>
+    <button class="btn primary" id="btnPublish"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>Publish files</button>
+  </header>
+
+  <nav class="side">
+    <h3>Main pages</h3><div id="navMain"></div>
+    <h3>Blog posts</h3><div id="navBlog"></div>
+    <h3>Help</h3>
+    <button class="pg" id="btnHelp"><span class="dot"></span><span class="nm">How this works</span></button>
+  </nav>
+
+  <div class="main">
+    <div class="bar">
+      <div class="seg" id="modeSeg">
+        <button data-mode="edit" class="on">Edit</button>
+        <button data-mode="preview">Preview</button>
+      </div>
+      <div class="seg" id="widthSeg">
+        <button data-w="full" class="on">Desktop</button>
+        <button data-w="tablet">Tablet</button>
+        <button data-w="phone">Phone</button>
+      </div>
+      <div class="spacer"></div>
+      <span class="note" id="hintTxt">Click any text or image on the page to edit it.</span>
+    </div>
+    <div class="frame" id="frame">
+      <iframe id="stage" title="Website preview"></iframe>
+      <div id="veil"><div class="msg">
+        <h2>Load your website files</h2>
+        <p>Choose the <b>halina-travels-final</b> folder so the admin can read and edit your pages.</p>
+        <button class="btn primary" id="btnPick">Choose site folder</button>
+        <p style="margin-top:14px">Tip: if you run the site on a local server, files load automatically.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <aside class="insp" id="insp">
+    <div class="tabs">
+      <button data-pane="sel" class="on">Selected</button>
+      <button data-pane="list">All content</button>
+    </div>
+    <div class="pane on" id="paneSel"></div>
+    <div class="pane" id="paneList"></div>
+  </aside>
+</div>
+
+<div class="modal" id="imgModal"><div class="box">
+  <div class="hd"><h2>Replace image</h2><button class="btn" data-close>Close</button></div>
+  <div class="bd">
+    <div class="drop" id="drop">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 9l5-5 5 5M12 4v12"/></svg>
+      <p><b>Click to upload</b> or drag an image here<br>JPG, PNG, WebP or SVG</p>
+    </div>
+    <input type="file" id="file" accept="image/*" hidden>
+    <div class="hr"></div>
+    <div class="fld"><label for="imgUrl">…or paste an image URL / file path</label>
+      <input type="text" id="imgUrl" placeholder="https://example.com/photo.jpg"></div>
+    <div class="fld"><label for="imgAlt">Alt text (for accessibility &amp; SEO)</label>
+      <input type="text" id="imgAlt" placeholder="Beach in Palawan"></div>
+    <img class="thumb" id="imgPrev" alt="Current image preview">
+  </div>
+  <div class="ft"><button class="btn" data-close>Cancel</button><button class="btn primary" id="imgApply">Apply image</button></div>
+</div></div>
+
+<div class="modal" id="helpModal"><div class="box">
+  <div class="hd"><h2>How the admin console works</h2><button class="btn" data-close>Close</button></div>
+  <div class="bd" id="helpBody"></div>
+  <div class="ft"><button class="btn primary" data-close>Got it</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+
+
+
+
+<script>
+/* ===== Halina Travels Admin Console ===== */
+(function () {
+"use strict";
+
+var PW_KEY = "halina_admin_pw_v1";
+var DEF_PW = "halina2026";
+var STORE = "halina_admin_drafts_v1";
+
+var PAGES = [
+  { f: "index.html", n: "Home", g: "main" },
+  { f: "destinations.html", n: "Destinations", g: "main" },
+  { f: "holidays.html", n: "Holidays", g: "main" },
+  { f: "airlines.html", n: "Airlines", g: "main" },
+  { f: "travel-guide.html", n: "Travel Guide", g: "main" },
+  { f: "social-proof.html", n: "Reviews", g: "main" },
+  { f: "promo-black-friday.html", n: "Black Friday Promo", g: "main" },
+  { f: "blog.html", n: "Blog index", g: "main" },
+  { f: "contact.html", n: "Contact", g: "main" },
+  { f: "blog/50-uk-hidden-gems.html", n: "50 UK Hidden Gems", g: "blog" },
+  { f: "blog/2026-british-grand-prix.html", n: "2026 British Grand Prix", g: "blog" },
+  { f: "blog/best-top-20-uk-holiday-destinations.html", n: "Top 20 UK Holidays", g: "blog" },
+  { f: "blog/philippine-independence-day.html", n: "Philippine Independence Day", g: "blog" },
+  { f: "blog/things-to-do-in-london-in-december.html", n: "London in December", g: "blog" },
+  { f: "blog/when-is-spring-in-the-uk-2026.html", n: "Spring in the UK 2026", g: "blog" }
+];
+
+var SKIP = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, HEAD: 1, META: 1, LINK: 1, TITLE: 1, HTML: 1, BODY: 1, SVG: 1, PATH: 1, CIRCLE: 1, LINE: 1, G: 1, RECT: 1, POLYGON: 1, DEFS: 1, USE: 1 };
+
+var originals = {};   // file -> pristine html
+var drafts = {};      // file -> edited html
+var current = null;
+var doc = null;       // iframe document
+var sel = null;       // selected element in iframe
+var undoStack = [];
+var mode = "edit";
+var imgTarget = null;
+var pendingSrc = null;
+
+var $ = function (id) { return document.getElementById(id); };
+var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); };
+
+function toast(msg) {
+  var t = $("toast"); t.textContent = msg; t.classList.add("on");
+  clearTimeout(t._t); t._t = setTimeout(function () { t.classList.remove("on"); }, 2200);
+}
+function setStatus(txt, cls) {
+  var s = $("status"); s.textContent = txt; s.className = "pill" + (cls ? " " + cls : "");
+}
+
+/* ---------- login ---------- */
+function storedPw() { try { return localStorage.getItem(PW_KEY) || DEF_PW; } catch (e) { return DEF_PW; } }
+$("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  if ($("pw").value === storedPw()) {
+    $("login").style.display = "none";
+    $("app").classList.add("on");
+    boot();
+  } else {
+    $("loginErr").textContent = "Wrong password. Try again.";
+    $("pw").select();
+  }
+});
+
+/* ---------- draft storage ---------- */
+function loadDrafts() {
+  try { drafts = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { drafts = {}; }
+}
+function saveDrafts(quiet) {
+  try {
+    localStorage.setItem(STORE, JSON.stringify(drafts));
+    if (!quiet) { toast("Draft saved on this device"); setStatus("Draft saved", "saved"); }
+    return true;
+  } catch (e) {
+    if (!quiet) toast("Draft too large to store \u2014 use Publish files instead");
+    return false;
+  }
+}
+
+/* ---------- file loading ---------- */
+function fetchAll() {
+  return Promise.all(PAGES.map(function (p) {
+    return fetch(p.f, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+      .then(function (t) { originals[p.f] = t; })
+      .catch(function () { });
+  }));
+}
+function pickFolder() {
+  var inp = document.createElement("input");
+  inp.type = "file"; inp.multiple = true;
+  inp.webkitdirectory = true; inp.setAttribute("directory", "");
+  inp.addEventListener("change", function () {
+    var files = Array.prototype.slice.call(inp.files).filter(function (f) { return /\.html?$/i.test(f.name); });
+    if (!files.length) { toast("No HTML files found in that folder"); return; }
+    var left = files.length;
+    files.forEach(function (f) {
+      var rel = (f.webkitRelativePath || f.name).split("/").slice(1).join("/");
+      var fr = new FileReader();
+      fr.onload = function () {
+        if (rel && rel !== "admin.html") originals[rel] = fr.result;
+        if (--left === 0) afterLoad();
+      };
+      fr.readAsText(f);
+    });
+  });
+  inp.click();
+}
+$("btnPick").addEventListener("click", pickFolder);
+
+function boot() {
+  loadDrafts();
+  buildNav();
+  setStatus("Loading pages\u2026");
+  fetchAll().then(afterLoad);
+}
+function afterLoad() {
+  var got = PAGES.filter(function (p) { return originals[p.f]; });
+  if (!got.length) { setStatus("Files not loaded"); $("veil").classList.remove("hide"); return; }
+  $("veil").classList.add("hide");
+  setStatus(got.length + " pages loaded", "saved");
+  buildNav();
+  openPage(current || got[0].f);
+}
+
+/* ---------- nav ---------- */
+function buildNav() {
+  ["main", "blog"].forEach(function (g) {
+    var box = $(g === "main" ? "navMain" : "navBlog");
+    box.innerHTML = "";
+    PAGES.filter(function (p) { return p.g === g; }).forEach(function (p) {
+      var b = document.createElement("button");
+      b.className = "pg" + (p.f === current ? " active" : "") + (drafts[p.f] ? " mod" : "");
+      b.innerHTML = '<span class="dot"></span><span class="nm">' + esc(p.n) + "</span>";
+      b.disabled = !originals[p.f];
+      b.style.opacity = originals[p.f] ? "" : ".45";
+      b.addEventListener("click", function () { openPage(p.f); });
+      box.appendChild(b);
+    });
+  });
+}
+function pageName(f) {
+  for (var i = 0; i < PAGES.length; i++) if (PAGES[i].f === f) return PAGES[i].n;
+  return f;
+}
+
+/* ---------- render page into iframe ---------- */
+function openPage(f) {
+  if (!originals[f]) return;
+  current = f; sel = null; undoStack = [];
+  buildNav();
+  var html = drafts[f] || originals[f];
+  var base = f.indexOf("/") > -1 ? f.split("/").slice(0, -1).join("/") + "/" : "";
+  var d = new DOMParser().parseFromString(html, "text/html");
+  if (base) {
+    var b = d.createElement("base"); b.setAttribute("href", base); b.id = "__admBase";
+    d.head.insertBefore(b, d.head.firstChild);
+  }
+  var st = $("stage");
+  st.onload = function () { st.onload = null; attach(); };
+  st.srcdoc = "<!DOCTYPE html>" + d.documentElement.outerHTML;
+  renderSelected(); renderList();
+  setStatus(drafts[f] ? "Unsaved edits" : "No changes", drafts[f] ? "dirty" : "");
+}
+
+var EDIT_CSS =
+  "[data-adm-hot]{outline:2px dashed rgba(39,131,222,.75)!important;outline-offset:2px;cursor:pointer}" +
+  "[data-adm-sel]{outline:2px solid #2783DE!important;outline-offset:2px;box-shadow:0 0 0 6px rgba(39,131,222,.14)!important}" +
+  "[contenteditable=true]{outline:2px solid #46A171!important;outline-offset:2px;cursor:text}" +
+  "#__admTip{position:fixed;z-index:2147483647;background:#2C2C2B;color:#fff;font:600 11px system-ui,sans-serif;" +
+  "padding:3px 8px;border-radius:5px;pointer-events:none;letter-spacing:.03em;white-space:nowrap}";
+
+function attach() {
+  doc = $("stage").contentDocument;
+  if (!doc) return;
+  var s = doc.createElement("style"); s.id = "__admStyle"; s.textContent = EDIT_CSS;
+  doc.head.appendChild(s);
+  var tip = doc.createElement("div"); tip.id = "__admTip"; tip.style.display = "none";
+  doc.body.appendChild(tip);
+
+  doc.addEventListener("mouseover", onHover, true);
+  doc.addEventListener("mouseout", function () { clearHot(); }, true);
+  doc.addEventListener("click", onClick, true);
+  doc.addEventListener("submit", function (e) { e.preventDefault(); }, true);
+  applyMode();
+}
+function clearHot() {
+  if (!doc) return;
+  var h = doc.querySelector("[data-adm-hot]"); if (h) h.removeAttribute("data-adm-hot");
+  var t = doc.getElementById("__admTip"); if (t) t.style.display = "none";
+}
+function candidate(el) {
+  if (!el || el.nodeType !== 1) return null;
+  if (el.id === "__admTip") return null;
+  if (el.tagName === "IMG") return el;
+  var svg = el.closest && el.closest("svg");
+  if (svg) el = svg.parentElement || svg;
+  var n = el;
+  while (n && n.nodeType === 1 && n !== doc.body) {
+    if (!SKIP[n.tagName] && hasText(n)) return n;
+    if (!SKIP[n.tagName] && bgImage(n)) return n;
+    n = n.parentElement;
+  }
+  return null;
+}
+/* Hit-test the whole stack at the pointer so overlays (gradients, ribbons,
+   shine layers) never block the image or text underneath them. */
+function candidateAt(e) {
+  if (!doc || !doc.elementsFromPoint) return candidate(e.target);
+  var stack = doc.elementsFromPoint(e.clientX, e.clientY) || [];
+  for (var i = 0; i < stack.length; i++) {
+    var el = stack[i];
+    if (!el || el.nodeType !== 1 || el.id === "__admTip") continue;
+    if (SKIP[el.tagName]) continue;
+    if (el.tagName === "IMG") return el;
+    if (hasText(el)) return el;
+    if (bgImage(el)) return el;
+  }
+  return candidate(e.target);
+}
+function hasText(el) {
+  for (var i = 0; i < el.childNodes.length; i++) {
+    var c = el.childNodes[i];
+    if (c.nodeType === 3 && c.nodeValue.trim()) return true;
+  }
+  return false;
+}
+function bgImage(el) {
+  var v = el.getAttribute && el.getAttribute("style");
+  return v && /background(-image)?\s*:\s*[^;]*url\(/i.test(v);
+}
+function kindOf(el) {
+  if (!el) return "";
+  if (el.tagName === "IMG") return "Image";
+  if (bgImage(el) && !hasText(el)) return "Background image";
+  if (/^H[1-6]$/.test(el.tagName)) return "Heading " + el.tagName[1];
+  if (el.tagName === "A") return "Link";
+  if (el.tagName === "BUTTON") return "Button";
+  if (el.tagName === "LI") return "List item";
+  return "Text";
+}
+function onHover(e) {
+  if (mode !== "edit") return;
+  var el = candidateAt(e);
+  clearHot();
+  if (!el) return;
+  el.setAttribute("data-adm-hot", "1");
+  var tip = doc.getElementById("__admTip");
+  if (tip) {
+    var r = el.getBoundingClientRect();
+    tip.textContent = kindOf(el).toUpperCase();
+    tip.style.display = "block";
+    tip.style.left = Math.max(4, r.left) + "px";
+    tip.style.top = Math.max(4, r.top - 20) + "px";
+  }
+}
+function onClick(e) {
+  if (mode !== "edit") {
+    var a = e.target.closest && e.target.closest("a[href]");
+    if (a) { e.preventDefault(); hopTo(a.getAttribute("href")); }
+    return;
+  }
+  e.preventDefault(); e.stopPropagation();
+  var el = candidateAt(e);
+  if (el) select(el); else toast("Nothing editable there \u2014 try clicking the text or photo itself");
+}
+function hopTo(href) {
+  if (!href || href[0] === "#") return;
+  var f = href.replace(/^\.\//, "").replace(/^\.\.\//, "").split("#")[0];
+  var hit = PAGES.filter(function (p) { return p.f === f || p.f.split("/").pop() === f; })[0];
+  if (hit && originals[hit.f]) openPage(hit.f); else toast("External or unknown link: " + href);
+}
+function select(el) {
+  if (!doc) return;
+  var old = doc.querySelector("[data-adm-sel]");
+  if (old) { old.removeAttribute("data-adm-sel"); old.removeAttribute("contenteditable"); }
+  sel = el;
+  el.setAttribute("data-adm-sel", "1");
+  try { el.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (x) { }
+  showPane("sel");
+  renderSelected();
+  $("insp").classList.add("open");
+}
+
+/* ---------- change tracking ---------- */
+function snapshot() {
+  if (!doc) return;
+  undoStack.push(serialize());
+  if (undoStack.length > 30) undoStack.shift();
+}
+function serialize() {
+  var clone = doc.documentElement.cloneNode(true);
+  var kill = clone.querySelectorAll("#__admStyle,#__admTip,#__admBase");
+  for (var i = 0; i < kill.length; i++) kill[i].remove();
+  var marked = clone.querySelectorAll("[data-adm-sel],[data-adm-hot],[contenteditable]");
+  for (var j = 0; j < marked.length; j++) {
+    marked[j].removeAttribute("data-adm-sel");
+    marked[j].removeAttribute("data-adm-hot");
+    marked[j].removeAttribute("contenteditable");
+    marked[j].removeAttribute("spellcheck");
+  }
+  return "<!DOCTYPE html>\n" + clone.outerHTML;
+}
+function commit() {
+  if (!doc || !current) return;
+  drafts[current] = serialize();
+  setStatus("Unsaved edits", "dirty");
+  buildNav();
+  saveDrafts(true);
+  renderList();
+}
+
+window.__adm = {
+  PAGES: PAGES, get doc() { return doc; }, get sel() { return sel; },
+  get current() { return current; },
+  get originals() { return originals; },
+  get drafts() { return drafts; },
+  select: select, commit: commit, snapshot: snapshot, serialize: serialize,
+  openPage: openPage, buildNav: buildNav, toast: toast, setStatus: setStatus,
+  esc: esc, $: $, kindOf: kindOf, hasText: hasText, bgImage: bgImage,
+  saveDrafts: saveDrafts, pageName: pageName,
+  get undoStack() { return undoStack; },
+  set undoStack(v) { undoStack = v; },
+  get mode() { return mode; }, set mode(v) { mode = v; },
+  get imgTarget() { return imgTarget; }, set imgTarget(v) { imgTarget = v; },
+  get pendingSrc() { return pendingSrc; }, set pendingSrc(v) { pendingSrc = v; },
+  applyMode: function () { applyMode(); }
+};
+
+function applyMode() {
+  if (!doc) return;
+  var st = doc.getElementById("__admStyle");
+  if (st) st.textContent = mode === "edit" ? EDIT_CSS : "";
+  if (mode !== "edit") {
+    var s2 = doc.querySelector("[data-adm-sel]");
+    if (s2) { s2.removeAttribute("data-adm-sel"); s2.removeAttribute("contenteditable"); }
+    sel = null; renderSelected();
+  }
+  $("hintTxt").textContent = mode === "edit"
+    ? "Click any text or image on the page to edit it."
+    : "Preview mode \u2014 links switch pages, nothing is editable.";
+}
+
+/* placeholders replaced in part 2 */
+var renderSelected = function () { };
+var renderList = function () { };
+var showPane = function () { };
+window.__admBind = function (rs, rl, sp) { renderSelected = rs; renderList = rl; showPane = sp; };
+})();
+
+/* ===== Halina Travels Admin Console — inspector, CRUD, publish ===== */
+(function () {
+"use strict";
+var A = window.__adm, $ = A.$, esc = A.esc;
+var activePane = "sel";
+
+function showPane(name) {
+  activePane = name;
+  var tabs = document.querySelectorAll(".insp .tabs button");
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.toggle("on", tabs[i].dataset.pane === name);
+  $("paneSel").classList.toggle("on", name === "sel");
+  $("paneList").classList.toggle("on", name === "list");
+}
+document.querySelectorAll(".insp .tabs button").forEach(function (b) {
+  b.addEventListener("click", function () { showPane(b.dataset.pane); if (b.dataset.pane === "list") renderList(); });
+});
+
+/* ---------- repeat-group helpers ---------- */
+function sig(el) { return el.tagName + "|" + (el.getAttribute("class") || ""); }
+function groupOf(el) {
+  var node = el, doc = A.doc;
+  while (node && node.parentElement && node.parentElement !== doc.body) {
+    var sibs = Array.prototype.filter.call(node.parentElement.children, function (c) { return sig(c) === sig(node); });
+    if (sibs.length >= 2 && node.getAttribute("class")) return { node: node, sibs: sibs, idx: sibs.indexOf(node) };
+    node = node.parentElement;
+  }
+  return null;
+}
+function clearTexts(el) {
+  var w = el.ownerDocument.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+  var n, list = [];
+  while ((n = w.nextNode())) if (n.nodeValue.trim()) list.push(n);
+  list.forEach(function (t, i) { t.nodeValue = i === 0 ? "New item" : "Edit this text"; });
+}
+
+/* ---------- selected pane ---------- */
+function renderSelected() {
+  var box = $("paneSel"), el = A.sel;
+  if (!el || !A.doc || !A.doc.contains(el)) {
+    box.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>' +
+      "Nothing selected.<br>Click any text or image in the page to edit it.</div>";
+    return;
+  }
+  var kind = A.kindOf(el), g = groupOf(el), h = [];
+  h.push('<div class="fld"><span class="tag">' + esc(kind) + "</span> <span class=\"note\">&lt;" +
+    el.tagName.toLowerCase() + "&gt;" + (el.className && typeof el.className === "string" ? " ." + esc(el.className.split(" ")[0]) : "") + "</span></div>");
+
+  if (el.tagName === "IMG") {
+    h.push('<img class="thumb" id="selThumb" alt="Selected image">');
+    h.push('<div class="row" style="margin-top:10px"><button class="btn primary" data-act="img">Replace image</button></div>');
+    h.push('<div class="hr"></div><div class="fld"><label for="fAlt">Alt text</label><input type="text" id="fAlt" value="' + esc(el.getAttribute("alt") || "") + '"></div>');
+  } else if (A.bgImage(el)) {
+    h.push('<div class="row"><button class="btn primary" data-act="bg">Replace background image</button></div><div class="hr"></div>');
+  } else if (el.querySelectorAll && el.querySelectorAll("img").length === 1) {
+    h.push('<img class="thumb" id="selThumb" alt="Image inside this block">');
+    h.push('<div class="row" style="margin-top:10px"><button class="btn primary" data-act="imgin">Replace image</button></div><div class="hr"></div>');
+  }
+
+  var texts = [];
+  for (var i = 0; i < el.childNodes.length; i++) {
+    var c = el.childNodes[i];
+    if (c.nodeType === 3 && c.nodeValue.trim()) texts.push(c);
+  }
+  if (texts.length === 1 && el.children.length === 0) {
+    h.push('<div class="fld"><label for="fTxt">Text</label><textarea id="fTxt">' + esc(el.textContent) + "</textarea></div>");
+  } else if (texts.length) {
+    h.push('<div class="fld"><label>Text parts</label></div>');
+    texts.forEach(function (t, k) {
+      h.push('<div class="fld"><input type="text" data-tn="' + k + '" value="' + esc(t.nodeValue.trim()) + '"></div>');
+    });
+  }
+  if (el.tagName === "A") {
+    h.push('<div class="fld"><label for="fHref">Link URL</label><input type="text" id="fHref" value="' + esc(el.getAttribute("href") || "") + '"></div>');
+  }
+  h.push('<div class="row"><button class="btn" data-act="inline">Edit on page</button><button class="btn primary" data-act="syncdb">Sync selected content</button></div>');
+
+  var bt = g ? g.node : el;
+  h.push('<div class="hr"></div><div class="fld"><label>Block actions</label></div>');
+  h.push('<p class="note" style="margin-bottom:10px">Applies to the whole block: <b>&lt;' + bt.tagName.toLowerCase() +
+    (bt.getAttribute("class") ? " ." + esc(bt.getAttribute("class").split(" ")[0]) : "") + "&gt;</b>" +
+    (g ? " \u2014 item <b>" + (g.idx + 1) + "</b> of <b>" + g.sibs.length + "</b> in a repeating group." : ".") + "</p>");
+  h.push('<div class="row">' +
+    '<button class="btn" data-act="add">Add new</button>' +
+    '<button class="btn" data-act="dup">Duplicate</button></div>' +
+    '<div class="row" style="margin-top:8px">' +
+    '<button class="btn" data-act="up">Move up</button>' +
+    '<button class="btn" data-act="down">Move down</button></div>' +
+    '<div class="row" style="margin-top:8px"><button class="btn danger" data-act="del">Delete this block</button></div>');
+  h.push('<div class="hr"></div><p class="note">Add, duplicate and delete work on the highlighted block. Use <b>Move up / down</b> to reorder cards, list items and sections.</p>');
+
+  box.innerHTML = h.join("");
+  var th = $("selThumb");
+  if (th) {
+    var im = el.tagName === "IMG" ? el : el.querySelector("img");
+    if (im) th.src = im.currentSrc || im.src;
+  }
+
+  var ft = $("fTxt");
+  if (ft) ft.addEventListener("input", function () { A.snapshot(); el.textContent = ft.value; A.commit(); });
+  box.querySelectorAll("[data-tn]").forEach(function (inp) {
+    inp.addEventListener("input", function () {
+      A.snapshot(); texts[+inp.dataset.tn].nodeValue = inp.value; A.commit();
+    });
+  });
+  var fa = $("fAlt");
+  if (fa) fa.addEventListener("input", function () { el.setAttribute("alt", fa.value); A.commit(); });
+  var fh = $("fHref");
+  if (fh) fh.addEventListener("input", function () { el.setAttribute("href", fh.value); A.commit(); });
+
+  box.querySelectorAll("[data-act]").forEach(function (b) {
+    b.addEventListener("click", function () { act(b.dataset.act, el, g); });
+  });
+}
+
+function act(a, el, g) {
+  if (a === "img") return openImg(el, "src");
+  if (a === "imgin") return openImg(el.querySelector("img"), "src");
+  if (a === "bg") return openImg(el, "bg");
+  if (a === "syncdb") {
+    if (window.HalinaAdminDB) window.HalinaAdminDB.captureSelection(A.current, el);
+    else A.toast("Database manager is still loading");
+    return;
+  }
+  var t = g ? g.node : el;
+  if (a === "inline") {
+    el.setAttribute("contenteditable", "true");
+    el.focus();
+    el.addEventListener("blur", function once() {
+      el.removeAttribute("contenteditable");
+      el.removeEventListener("blur", once);
+      A.commit(); renderSelected();
+    });
+    A.toast("Type directly on the page, then click away");
+    return;
+  }
+  A.snapshot();
+  if (a === "dup" || a === "add") {
+    var copy = t.cloneNode(true);
+    copy.removeAttribute("data-adm-sel"); copy.removeAttribute("data-adm-hot"); copy.removeAttribute("id");
+    var inner = copy.querySelectorAll("[data-adm-sel],[data-adm-hot]");
+    for (var q = 0; q < inner.length; q++) { inner[q].removeAttribute("data-adm-sel"); inner[q].removeAttribute("data-adm-hot"); }
+    if (a === "add") clearTexts(copy);
+    t.parentNode.insertBefore(copy, t.nextSibling);
+    A.commit(); A.select(copy);
+    A.toast(a === "add" ? "New block added \u2014 edit its text and image" : "Block duplicated");
+    return;
+  }
+  if (a === "del") {
+    if (!confirm("Delete this block from the page? This cannot be undone after publishing.")) return;
+    var p = t.parentElement; t.remove();
+    A.commit();
+    A.select(p && p !== A.doc.body ? p : A.doc.body.firstElementChild);
+    A.toast("Block deleted"); return;
+  }
+  if (a === "up" && t.previousElementSibling) { t.parentNode.insertBefore(t, t.previousElementSibling); A.commit(); A.select(t); A.toast("Moved up"); return; }
+  if (a === "down" && t.nextElementSibling) { t.parentNode.insertBefore(t.nextElementSibling, t); A.commit(); A.select(t); A.toast("Moved down"); return; }
+  A.toast("Cannot move any further");
+}
+
+/* ---------- all content list ---------- */
+var listQuery = "";
+function renderList() {
+  var box = $("paneList"), doc = A.doc;
+  if (!doc) { box.innerHTML = '<div class="empty">Load a page first.</div>'; return; }
+  var items = [];
+  var imgs = doc.querySelectorAll("img");
+  for (var i = 0; i < imgs.length && items.length < 500; i++) items.push({ t: "img", el: imgs[i] });
+  var txt = doc.querySelectorAll("h1,h2,h3,h4,h5,h6,p,li,a,button,td,th,blockquote,figcaption,small,b,strong,span");
+  for (var j = 0; j < txt.length && items.length < 900; j++) {
+    var e = txt[j];
+    if (A.hasText(e) && e.textContent.trim().length > 1) items.push({ t: "txt", el: e });
+  }
+  var q = listQuery.toLowerCase();
+  var shown = items.filter(function (it) {
+    if (!q) return true;
+    var s = it.t === "img" ? (it.el.getAttribute("alt") || "") : it.el.textContent;
+    return s.toLowerCase().indexOf(q) > -1;
+  }).slice(0, 300);
+
+  var h = ['<input class="srch" id="srch" type="text" placeholder="Search text or image alt\u2026" value="' + esc(listQuery) + '">'];
+  h.push('<p class="note" style="margin-bottom:10px">' + shown.length + " of " + items.length + " items on <b>" + esc(A.pageName(A.current)) + "</b></p>");
+  shown.forEach(function (it, k) {
+    if (it.t === "img") {
+      h.push('<button class="item" data-k="' + k + '"><img class="ic" src="' + esc(it.el.currentSrc || it.el.src) +
+        '" alt=""><span class="tx"><b>' + esc(it.el.getAttribute("alt") || "Untitled image") + "</b><small>Image</small></span></button>");
+    } else {
+      h.push('<button class="item" data-k="' + k + '"><span class="ic">' + esc(it.el.tagName.toLowerCase().slice(0, 3)) +
+        '</span><span class="tx"><b>' + esc(it.el.textContent.trim().slice(0, 70)) + "</b><small>" + esc(A.kindOf(it.el)) + "</small></span></button>");
+    }
+  });
+  if (!shown.length) h.push('<div class="empty">No matches.</div>');
+  box.innerHTML = h.join("");
+  var s = $("srch");
+  s.addEventListener("input", function () { listQuery = s.value; renderList(); var n = $("srch"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); });
+  box.querySelectorAll(".item").forEach(function (b) {
+    b.addEventListener("click", function () { A.select(shown[+b.dataset.k].el); });
+  });
+}
+
+/* ---------- image modal ---------- */
+function openImg(el, how) {
+  A.imgTarget = { el: el, how: how }; A.pendingSrc = null;
+  var cur = how === "src" ? (el.currentSrc || el.src) : (/url\(['"]?([^'")]+)/.exec(el.getAttribute("style") || "") || [])[1] || "";
+  $("imgPrev").src = cur || "";
+  $("imgUrl").value = "";
+  $("imgAlt").value = how === "src" ? (el.getAttribute("alt") || "") : "";
+  $("imgAlt").parentElement.style.display = how === "src" ? "" : "none";
+  $("imgModal").classList.add("on");
+}
+function readImg(file) {
+  if (!file || !/^image\//.test(file.type)) { A.toast("Please choose an image file"); return; }
+  var fr = new FileReader();
+  fr.onload = function () { A.pendingSrc = fr.result; $("imgPrev").src = fr.result; A.toast("Image ready \u2014 click Apply"); };
+  fr.readAsDataURL(file);
+}
+$("drop").addEventListener("click", function () { $("file").click(); });
+$("file").addEventListener("change", function () { readImg(this.files[0]); });
+["dragenter", "dragover"].forEach(function (ev) {
+  $("drop").addEventListener(ev, function (e) { e.preventDefault(); this.classList.add("over"); });
+});
+["dragleave", "drop"].forEach(function (ev) {
+  $("drop").addEventListener(ev, function (e) { e.preventDefault(); this.classList.remove("over"); });
+});
+$("drop").addEventListener("drop", function (e) { readImg(e.dataTransfer.files[0]); });
+$("imgUrl").addEventListener("input", function () { A.pendingSrc = this.value.trim(); $("imgPrev").src = this.value.trim(); });
+$("imgApply").addEventListener("click", function () {
+  var t = A.imgTarget;
+  if (!t) return;
+  if (!A.pendingSrc) { A.toast("Choose a file or paste a URL first"); return; }
+  A.snapshot();
+  if (t.how === "src") {
+    t.el.removeAttribute("srcset");
+    t.el.setAttribute("src", A.pendingSrc);
+    t.el.setAttribute("alt", $("imgAlt").value);
+  } else {
+    var st = t.el.getAttribute("style") || "";
+    t.el.setAttribute("style", /url\(/.test(st)
+      ? st.replace(/url\(['"]?[^'")]*['"]?\)/, 'url("' + A.pendingSrc + '")')
+      : st + ";background-image:url(\"" + A.pendingSrc + '")');
+  }
+  A.commit(); renderSelected();
+  $("imgModal").classList.remove("on");
+  A.toast("Image updated");
+});
+document.querySelectorAll("[data-close]").forEach(function (b) {
+  b.addEventListener("click", function () { b.closest(".modal").classList.remove("on"); });
+});
+document.querySelectorAll(".modal").forEach(function (m) {
+  m.addEventListener("click", function (e) { if (e.target === m) m.classList.remove("on"); });
+});
+
+/* ---------- toolbar ---------- */
+$("btnUndo").addEventListener("click", function () {
+  var st = A.undoStack;
+  if (!st.length) { A.toast("Nothing to undo"); return; }
+  var prev = st.pop();
+  A.drafts[A.current] = prev;
+  A.saveDrafts(true);
+  var keep = st.slice();
+  A.openPage(A.current);
+  A.undoStack = keep;
+  A.toast("Undone");
+});
+$("btnRevert").addEventListener("click", function () {
+  if (!A.current) return;
+  if (!confirm("Discard all edits on \u201c" + A.pageName(A.current) + "\u201d and restore the original page?")) return;
+  delete A.drafts[A.current];
+  A.saveDrafts(true);
+  A.openPage(A.current);
+  A.toast("Page reverted to original");
+});
+$("btnSave").addEventListener("click", function () { A.saveDrafts(false); });
+$("btnHelp").addEventListener("click", function () { $("helpModal").classList.add("on"); });
+
+document.querySelectorAll("#modeSeg button").forEach(function (b) {
+  b.addEventListener("click", function () {
+    document.querySelectorAll("#modeSeg button").forEach(function (x) { x.classList.remove("on"); });
+    b.classList.add("on"); A.mode = b.dataset.mode; A.applyMode();
+  });
+});
+document.querySelectorAll("#widthSeg button").forEach(function (b) {
+  b.addEventListener("click", function () {
+    document.querySelectorAll("#widthSeg button").forEach(function (x) { x.classList.remove("on"); });
+    b.classList.add("on");
+    $("frame").className = "frame" + (b.dataset.w === "full" ? "" : " w-" + b.dataset.w);
+  });
+});
+
+/* ---------- publish (zip) ---------- */
+var CRC = (function () {
+  var t = new Uint32Array(256);
+  for (var n = 0; n < 256; n++) { var c = n; for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+  return t;
+})();
+function crc32(u8) {
+  var c = 0xFFFFFFFF;
+  for (var i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function zip(files) {
+  var enc = new TextEncoder(), parts = [], central = [], off = 0;
+  function u16(n) { return [n & 255, (n >> 8) & 255]; }
+  function u32(n) { return [n & 255, (n >> 8) & 255, (n >> 16) & 255, (n >>> 24) & 255]; }
+  files.forEach(function (f) {
+    var name = enc.encode(f.name), data = enc.encode(f.data), c = crc32(data);
+    var lh = [].concat(u32(0x04034b50), u16(20), u16(0), u16(0), u16(0), u16(0), u32(c), u32(data.length), u32(data.length), u16(name.length), u16(0));
+    parts.push(new Uint8Array(lh), name, data);
+    central.push([].concat(u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(0), u16(0), u32(c), u32(data.length), u32(data.length), u16(name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(off)));
+    central[central.length - 1]._n = name;
+    off += lh.length + name.length + data.length;
+  });
+  var cs = off;
+  central.forEach(function (c) { parts.push(new Uint8Array(c), c._n); cs += c.length + c._n.length; });
+  parts.push(new Uint8Array([].concat(u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length), u32(cs - off), u32(off), u16(0))));
+  return new Blob(parts, { type: "application/zip" });
+}
+function dl(blob, name) {
+  var u = URL.createObjectURL(blob), a = document.createElement("a");
+  a.href = u; a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(function () { URL.revokeObjectURL(u); a.remove(); }, 1000);
+}
+$("btnPublish").addEventListener("click", function () {
+  var changed = Object.keys(A.drafts);
+  var publicConfig = window.__halinaConfigFile ? window.__halinaConfigFile() : "";
+  if (!changed.length && !publicConfig) { A.toast("No page changes or database config to publish yet"); return; }
+  var files = changed.map(function (f) { return { name: f, data: A.drafts[f] }; });
+  if (publicConfig) files.push({ name: "assets/js/halina-config.js", data: publicConfig });
+  files.push({
+    name: "HOW-TO-PUBLISH.txt",
+    data: "Halina Travels \u2014 updated pages\n\n" +
+      "These files were exported from the admin console on " + new Date().toLocaleString() + ".\n" +
+      "Changed pages:\n" + changed.map(function (c) { return "  - " + c; }).join("\n") +
+      "\n\nTo publish:\n1. Unzip this archive.\n2. Copy the files into your website folder, keeping the same folder structure\n   (files inside blog/ go into the blog/ folder).\n3. Overwrite the old files and upload the folder to your host.\n\n" +
+      "Uploaded images are embedded inside the HTML, so no extra image files are needed.\n"
+  });
+  dl(zip(files), "halina-travels-updated.zip");
+  A.setStatus("Exported " + files.length + " file(s)", "saved");
+  A.toast("Downloaded page changes and public database config");
+});
+
+/* ---------- help ---------- */
+$("helpBody").innerHTML =
+  "<p class='note' style='font-size:14px'>" +
+  "<b>1. Pick a page</b> in the left sidebar. An orange dot marks pages with unsaved edits.<br><br>" +
+  "<b>2. Click anything</b> in the page \u2014 a heading, paragraph, button, price or photo. " +
+  "The right panel opens with the fields for that item.<br><br>" +
+  "<b>3. Edit text</b> in the right panel, or press <i>Edit on page</i> to type directly in the layout.<br><br>" +
+  "<b>4. Change an image</b> with <i>Replace image</i> \u2014 upload from your computer or paste a URL. " +
+  "Always fill in alt text.<br><br>" +
+  "<b>5. Add / duplicate / delete</b> cards, list items and sections with the block buttons. " +
+  "<i>Add new</i> creates an empty copy of the selected block; <i>Move up / down</i> reorders it.<br><br>" +
+  "<b>6. Save draft</b> keeps your work in this browser. <b>Publish files</b> downloads a ZIP of every changed page \u2014 " +
+  "copy those files into your website folder and re-upload.<br><br>" +
+  "<b>All content</b> tab lists every text and image on the page with a search box, handy for quick fixes.<br><br>" +
+  "<i>Note:</i> the password gate is a light convenience lock, not real security. " +
+  "For a live site, keep this file off the public server or protect the folder on your host.</p>";
+
+window.addEventListener("beforeunload", function (e) {
+  if (Object.keys(A.drafts).length) { e.preventDefault(); e.returnValue = ""; }
+});
+
+window.__admBind(renderSelected, renderList, showPane);
+renderSelected();
+})();
+
+</script>
+<script src="assets/js/main.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
+<script src="assets/js/halina-config.js"></script>
+<script src="assets/js/admin-database.js"></script>
+</body>
+</html>
