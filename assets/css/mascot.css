@@ -1,0 +1,283 @@
+/* ============================================================
+   Halina Travels — Owl Mascot Companion (page-mascot)
+   ============================================================ */
+#mascot-host {
+  position: fixed;
+  left: 20px;
+  bottom: 14px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+.mascot-btn {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  filter: drop-shadow(0 6px 14px rgba(60, 14, 56, 0.25));
+  transition: filter 0.25s ease;
+}
+
+.mascot-btn:hover {
+  filter: drop-shadow(0 10px 20px rgba(60, 14, 56, 0.38));
+}
+
+.mascot-squash {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 78%;
+}
+
+.mascot-layer {
+  position: absolute;
+  inset: 0;
+  background-size: 300% 300%;
+  background-repeat: no-repeat;
+  transition: opacity 0.15s ease;
+}
+
+.mascot-layer.directions {
+  background-image: url('../../public/owl-directions.webp');
+}
+
+.mascot-layer.reactions {
+  background-image: url('../../public/owl-reactions.webp');
+}
+
+.mascot-speech-bubble {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(60, 14, 56, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 14px 14px 14px 4px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(60, 14, 56, 0.22);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+}
+
+.mascot-speech-bubble.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.mascot-badge {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold, #f2b33d);
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px var(--gold, #f2b33d);
+  z-index: 10;
+}
+
+/* ---------- Chat Panel ---------- */
+.mascot-chat {
+  position: fixed;
+  left: 20px;
+  bottom: 145px;
+  width: 350px;
+  max-width: calc(100vw - 40px);
+  max-height: 520px;
+  height: calc(100vh - 180px);
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(60, 14, 56, 0.28), 0 0 0 1px rgba(90, 22, 80, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), visibility 0.3s ease;
+}
+
+.mascot-chat.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.mascot-chat-head {
+  background: linear-gradient(135deg, var(--maroon, #5a1650), var(--deep, #3c0e38));
+  color: #fff;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mascot-chat-avatar {
+  font-size: 24px;
+}
+
+.mascot-chat-who {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--gold, #f2b33d);
+}
+
+.mascot-chat-sub {
+  font-size: 11.5px;
+  opacity: 0.85;
+}
+
+.mascot-chat-close {
+  margin-left: auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.mascot-chat-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mascot-chat-log {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--cream, #fbf2f6);
+}
+
+.mascot-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.mascot-msg.bot {
+  background: #fff;
+  color: var(--ink, #2b2130);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(60, 14, 56, 0.06);
+  border: 1px solid var(--cream2, #f3e3ec);
+}
+
+.mascot-msg.user {
+  background: linear-gradient(135deg, var(--rose, #ce5587), var(--rose-deep, #ad3d6c));
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.mascot-chips {
+  padding: 8px 14px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  background: #fff;
+  border-top: 1px solid var(--cream2, #f3e3ec);
+}
+
+.mascot-chip {
+  background: var(--cream, #fbf2f6);
+  color: var(--maroon, #5a1650);
+  border: 1px solid var(--cream2, #f3e3ec);
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mascot-chip:hover {
+  background: var(--maroon, #5a1650);
+  color: #fff;
+}
+
+.mascot-form {
+  display: flex;
+  padding: 10px 14px;
+  background: #fff;
+  border-top: 1px solid var(--cream2, #f3e3ec);
+  gap: 8px;
+}
+
+.mascot-form input {
+  flex: 1;
+  border: 1px solid var(--cream2, #f3e3ec);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 13.5px;
+  outline: none;
+  background: var(--cream, #fbf2f6);
+}
+
+.mascot-form input:focus {
+  border-color: var(--rose, #ce5587);
+  background: #fff;
+}
+
+.mascot-form button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose, #ce5587), var(--maroon, #5a1650));
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  #mascot-host {
+    left: 10px;
+    bottom: 10px;
+  }
+  .mascot-btn {
+    width: 90px;
+    height: 90px;
+  }
+  .mascot-chat {
+    left: 10px;
+    bottom: 105px;
+    width: calc(100vw - 20px);
+    height: 440px;
+  }
+}

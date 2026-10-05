@@ -143,7 +143,7 @@
 
   var audio = new Audio(audioSrc);
   audio.loop = true;
-  audio.preload = 'auto';
+  audio.preload = 'none';
 
   // Restore saved state from localStorage
   var STORAGE_KEY_TIME = 'halina_bgmusic_time';

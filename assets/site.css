@@ -192,6 +192,12 @@ footer{background:linear-gradient(160deg,var(--deep) 0%,var(--maroon) 90%);color
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
 #toast .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);flex:0 0 9px}
 
+/* ---------- deferred rendering performance ---------- */
+.sec-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
 /* ---------- responsive ---------- */
 @media(max-width:1000px){
   .menu,.callchip{display:none}
@@ -213,4 +219,37 @@ footer{background:linear-gradient(160deg,var(--deep) 0%,var(--maroon) 90%);color
   .article{padding-top:36px}
   .nav .btn{padding:7px 11px;font-size:11.5px}
   .hamburger{width:40px;height:40px}
+}
+@media(max-width:480px){
+  .wrap{padding:0 12px}
+  .sec-title h2{font-size:clamp(20px,5.8vw,26px)}
+  .phero h1{font-size:clamp(22px,6.8vw,32px)}
+  .phero .lead{font-size:15px;line-height:1.55}
+  .phero .wrap{padding-top:32px;padding-bottom:32px}
+  .topbar .wrap{padding:5px 8px;font-size:11px;gap:4px 6px}
+  .topbar a, .topbar button{font-size:11px!important}
+  .nav{min-height:52px;gap:8px}
+  .nav .btn{padding:6px 10px;font-size:11px}
+  .hamburger{width:36px;height:36px;border-radius:8px}
+  .cta-row{flex-direction:column;width:100%}
+  .cta-row .btn{width:100%}
+  .card .pad{padding:14px}
+  .ctabox{padding:24px 18px}
+  .ctabox h3{font-size:19px}
+  .article{padding:28px 12px 18px}
+  .article h2{font-size:22px;margin:28px 0 12px}
+  .article h3{font-size:18px;margin:20px 0 8px}
+  .article table{font-size:13px;display:block;overflow-x:auto;white-space:nowrap}
+  .article th, .article td{padding:8px 10px}
+  .tagline-banner{padding:28px 16px}
+  .tagline-banner .script-text{font-size:clamp(20px,5.5vw,28px)}
+  .tagline-banner p,.content-box .tagline-banner p{font-size:13.5px!important}
+  form.quote{padding:18px 14px}
+  #toTop{bottom:56px;right:14px;width:38px;height:38px}
+}
+@media(max-width:360px){
+  .wrap{padding:0 10px}
+  .nav .btn{padding:5px 8px;font-size:10.5px}
+  .hamburger{width:34px;height:34px}
+  .topbar{font-size:10.5px}
 }

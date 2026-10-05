@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/css/intro.css">
 <link rel="stylesheet" href="assets/css/enquiry.css">
+<link rel="stylesheet" href="assets/css/mascot.css">
 </head>
 <body>
 
@@ -30,7 +31,7 @@
 <header id="header">
   <div class="wrap nav">
     <a class="brand" href="index.html">
-      <img src="halina-logo.png" alt="Halina Travels Logo" class="mark">
+      <img src="halina-logo.png" alt="Halina Travels Logo" class="mark" fetchpriority="high" decoding="async">
       <span><b>Halina Travels</b><small>Halina, tara na sa Pilipinas!</small></span>
     </a>
     <nav class="menu" id="menu">
@@ -49,7 +50,6 @@
       <a href="about.html">About Us</a>
       <div class="drop"><a href="blog.html">More <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="dropdown single">
-          <a href="about.html">About Us</a>
           <a href="travel-guide.html">Philippines Travel Guide</a>
           <a href="social-proof.html">Social Proof</a>
           <a href="contact.html">Contact Us</a>
@@ -70,7 +70,6 @@
     <a href="promo-black-friday.html">Promo · Black Friday</a>
     <a href="about.html">About Us</a>
     <span class="mlabel">More</span>
-    <a class="sub" href="about.html">About Us</a>
     <a class="sub" href="travel-guide.html">Philippines Travel Guide</a>
     <a class="sub" href="social-proof.html">Social Proof</a>
     <a class="sub" href="contact.html">Contact Us</a>
@@ -150,8 +149,9 @@
 </script>
 <script src="assets/js/motion.js"></script>
 <script src="assets/js/main.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
-<script src="assets/js/halina-config.js"></script>
-<script src="assets/js/halina-cms.js"></script>
+<script src="assets/js/mascot.js" defer></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
+<script defer src="assets/js/halina-config.js"></script>
+<script defer src="assets/js/halina-cms.js"></script>
 </body>
 </html>
