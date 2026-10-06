@@ -6,6 +6,7 @@
 <link rel="icon" href="halina-logo.png" type="image/png">
 <link rel="apple-touch-icon" href="halina-logo.png">
 <meta name="theme-color" content="#E4002B">
+<link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/css/fx.css">
 <link rel="stylesheet" href="assets/css/intro.css">
 <link rel="stylesheet" href="assets/css/mascot.css">
@@ -57,9 +58,11 @@ section{position:relative}
 .socials svg{width:13px;height:13px;fill:currentColor}
 
 /* ---------- header ---------- */
-header{position:sticky;top:0;z-index:900;background:#fff;box-shadow:0 1px 0 rgba(228,0,43,.08);transition:box-shadow .25s}
-header.scrolled{box-shadow:0 6px 24px rgba(228,0,43,.14)}
-.nav{display:flex;align-items:center;gap:12px;min-height:60px}
+@media(min-width:1001px){
+  header{position:sticky;top:12px;z-index:900;max-width:1200px;margin:10px auto 0;width:calc(100% - 32px);border-radius:999px;background:rgba(255,255,255,.78);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid rgba(255,255,255,.65);box-shadow:0 8px 32px rgba(24,28,40,.1),0 2px 10px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,.8);transition:background .3s ease,box-shadow .3s ease,border-color .3s ease}
+  header.scrolled{background:rgba(255,255,255,.88);box-shadow:0 12px 36px rgba(228,0,43,.15),0 4px 16px rgba(24,28,40,.08);border-color:rgba(228,0,43,.2)}
+}
+.nav{display:flex;align-items:center;gap:12px;min-height:60px;padding:4px 20px}
 .brand{display:flex;align-items:center;gap:9px;margin-right:auto;flex:0 0 auto}
 .brand .mark{width:36px;height:36px;flex:0 0 36px;object-fit:contain}
 .brand b{font-size:17px;color:var(--maroon);letter-spacing:.2px;line-height:1.05;display:block;white-space:nowrap}
@@ -138,7 +141,7 @@ header.scrolled{box-shadow:0 6px 24px rgba(228,0,43,.14)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.45)}70%{box-shadow:0 0 0 12px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
 
 /* ---------- hero ---------- */
-.hero{position:relative;color:#fff;overflow:hidden;background:var(--deep)}
+.hero{position:relative;color:#fff;overflow:hidden;background:var(--deep);border-radius:0 0 40px 40px}
 .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none}
 .hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(40,8,38,.78) 0%,rgba(40,8,38,.35) 45%,rgba(40,8,38,.15) 100%)}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr .9fr;gap:40px;align-items:center;padding-top:84px;padding-bottom:150px}
@@ -242,9 +245,9 @@ header.scrolled{box-shadow:0 6px 24px rgba(228,0,43,.14)}
 .offer:hover .ph img{transform:scale(1.09)}
 .offer .ph .tag{position:absolute;top:10px;left:10px;background:rgba(60,14,56,.82);color:var(--gold);font-size:11px;font-weight:900;letter-spacing:1px;padding:5px 10px;border-radius:999px;text-transform:uppercase}
 .offer .body{display:flex;align-items:center;justify-content:space-between;padding:14px 14px 15px;gap:8px;background:linear-gradient(135deg,var(--maroon),var(--deep));color:#fff}
-.offer .body .to{font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:.75}
+.offer .body .to{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#FFFFFF;font-weight:800;opacity:1;text-shadow:0 1px 3px rgba(0,0,0,.5)}
 .offer .body b{font-size:16.5px;display:block;line-height:1.15}
-.offer .price small{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;opacity:.75;text-align:right}
+.offer .price small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#FFFFFF;font-weight:800;opacity:1;text-align:right;text-shadow:0 1px 3px rgba(0,0,0,.5)}
 .offer .price b{font-size:19px;color:var(--gold);text-align:right}
 .offer .go{width:38px;height:34px;flex:0 0 38px;border-radius:18px 7px 18px 7px;background:var(--rose);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s}
 .offer:hover .go{transform:translateX(4px);background:var(--gold)}
@@ -385,6 +388,8 @@ footer{background:#2A0827;color:#DFC3D8}
 
 /* ---------- responsive ---------- */
 @media (max-width:1020px){
+  header{position:sticky;top:0!important;z-index:900;width:100%!important;max-width:100%!important;margin:0!important;border-radius:0!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:none!important;border-bottom:1px solid rgba(228,0,43,.12)!important;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  .mobilemenu{border-radius:0!important;margin-top:0!important}
   .menu,.callchip{display:none}
   .brand span{display:none!important}
   .hamburger{display:flex;flex:0 0 auto}
@@ -431,6 +436,11 @@ footer{background:#2A0827;color:#DFC3D8}
   .searchband{margin-top:-120px}
 }
 @media (max-width:480px){
+  header{top:0!important;width:100%!important;margin:0!important;border-radius:0!important}
+  .nav{min-height:50px;gap:5px;padding:2px 8px}
+  .nav .btn{padding:6px 10px;font-size:11px}
+  .nav-icon-btn{width:34px;height:34px}
+  .brand .mark{width:32px;height:32px;flex:0 0 32px}
   .wrap{padding:0 12px}
   .hero h1{font-size:clamp(25px, 7.5vw, 34px)}
   .hero .script{font-size:clamp(30px, 9vw, 42px)}
