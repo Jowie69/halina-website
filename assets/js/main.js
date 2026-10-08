@@ -143,12 +143,12 @@
   window.__halinaBgMusicInitialized = true;
 
   // Resolve audio path relative to script location
-  var audioSrc = 'bgmusic.mp3';
+  var audioSrc = 'assets/audio/bgmusic.mp3';
   var scripts = document.getElementsByTagName('script');
   for (var i = 0; i < scripts.length; i++) {
     var src = scripts[i].src || '';
     if (src.indexOf('assets/js/main.js') !== -1) {
-      audioSrc = src.replace('assets/js/main.js', 'bgmusic.mp3');
+      audioSrc = src.replace('assets/js/main.js', 'assets/audio/bgmusic.mp3');
       break;
     }
   }

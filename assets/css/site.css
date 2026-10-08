@@ -72,22 +72,22 @@ section{position:relative}
 .phero{background:linear-gradient(115deg,var(--deep) 0%,var(--maroon) 52%,var(--plum) 100%);color:#fff;border-radius:0 0 40px 40px}
 .phero::before{content:"";position:absolute;inset:0;background:radial-gradient(720px 260px at 88% 0,rgba(255,184,0,.25),transparent),radial-gradient(520px 240px at 6% 100%,rgba(255,77,77,.28),transparent);z-index:1}
 .phero::after, .ribbon::after, .dest::after, .why::after, .ctabox::after, .about .panel::after, .cta .panel::after{content:"";position:absolute;inset:0;background-size:cover;background-position:center center;background-repeat:no-repeat;opacity:0.50;mix-blend-mode:overlay;pointer-events:none;z-index:1}
-.phero::after{background-image:url("img/img-01-837f0a23dd.webp")}
-.phero.phero-destinations::after, body.page-destinations .phero::after{background-image:url("img/img-03-79ca217aa5.webp")}
-.phero.phero-airlines::after, body.page-airlines .phero::after{background-image:url("img/img-04-27edf2c4b9.webp")}
-.phero.phero-holidays::after, body.page-holidays .phero::after{background-image:url("img/img-05-58d168bc24.webp")}
-.phero.phero-promo::after, body.page-promo .phero::after{background-image:url("img/img-06-fac233ddf8.webp")}
-.phero.phero-about::after, body.page-about .phero::after{background-image:url("img/img-02-c09e3214cd.webp")}
-.phero.phero-contact::after, body.page-contact .phero::after{background-image:url("img/img-07-c3155d8625.webp")}
-.phero.phero-blog::after, body.page-blog .phero::after{background-image:url("img/img-08-6c49b88a68.webp")}
-.phero.phero-guide::after, body.page-guide .phero::after{background-image:url("img/img-09-95e53a2c5c.webp")}
-.phero.phero-social::after, body.page-social .phero::after{background-image:url("img/img-10-989db0f4ef.webp")}
-.phero.phero-post-independence::after{background-image:url("img/img-12-c02e71a201.webp")}
-.phero.phero-post-gems::after{background-image:url("img/img-11-584de6ca5d.webp")}
-.phero.phero-post-london::after{background-image:url("img/img-01-837f0a23dd.webp")}
-.phero.phero-post-spring::after{background-image:url("img/hero-bg.webp")}
-.phero.phero-post-f1::after{background-image:url("img/img-04-27edf2c4b9.webp")}
-.phero.phero-post-top20::after{background-image:url("img/hero-pattern.webp")}
+.phero::after{background-image:url("../img/img-01-837f0a23dd.webp")}
+.phero.phero-destinations::after, body.page-destinations .phero::after{background-image:url("../img/img-03-79ca217aa5.webp")}
+.phero.phero-airlines::after, body.page-airlines .phero::after{background-image:url("../img/img-04-27edf2c4b9.webp")}
+.phero.phero-holidays::after, body.page-holidays .phero::after{background-image:url("../img/img-05-58d168bc24.webp")}
+.phero.phero-promo::after, body.page-promo .phero::after{background-image:url("../img/img-06-fac233ddf8.webp")}
+.phero.phero-about::after, body.page-about .phero::after{background-image:url("../img/img-02-c09e3214cd.webp")}
+.phero.phero-contact::after, body.page-contact .phero::after{background-image:url("../img/img-07-c3155d8625.webp")}
+.phero.phero-blog::after, body.page-blog .phero::after{background-image:url("../img/img-08-6c49b88a68.webp")}
+.phero.phero-guide::after, body.page-guide .phero::after{background-image:url("../img/img-09-95e53a2c5c.webp")}
+.phero.phero-social::after, body.page-social .phero::after{background-image:url("../img/img-10-989db0f4ef.webp")}
+.phero.phero-post-independence::after{background-image:url("../img/img-12-c02e71a201.webp")}
+.phero.phero-post-gems::after{background-image:url("../img/img-11-584de6ca5d.webp")}
+.phero.phero-post-london::after{background-image:url("../img/img-01-837f0a23dd.webp")}
+.phero.phero-post-spring::after{background-image:url("../img/hero-bg.webp")}
+.phero.phero-post-f1::after{background-image:url("../img/img-04-27edf2c4b9.webp")}
+.phero.phero-post-top20::after{background-image:url("../img/hero-pattern.webp")}
 .phero > *, .ribbon > *, .dest > *, .why > *, .ctabox > *, .about .panel > *, .cta .panel > *{position:relative;z-index:2}
 .phero .wrap{position:relative;padding-top:58px;padding-bottom:58px;z-index:2;max-width:860px}
 .crumb{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}

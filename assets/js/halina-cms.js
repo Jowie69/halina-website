@@ -228,11 +228,11 @@
           openTextSummary("Facebook enquiry", "Kumusta! I would like help planning a trip to the Philippines. Please let me know what details you need. Salamat!");
         } else if (text.indexOf("christmas") > -1 || text.indexOf("book early") > -1) openCatalog({ type: "deal", title: "Available seasonal deals" });
         else if (text.indexOf("deposit") > -1) openCatalog({ title: "Offers available with deposit options" });
-        else if (text.indexOf("quote") > -1) location.href = new URL("contact.html", siteRoot).href;
+        else if (text.indexOf("quote") > -1) location.href = new URL("pages/contact.html", siteRoot).href;
         else openCatalog({ title: "Available travel offers" });
       }, true);
     });
-    document.querySelectorAll("a.golink[href*='contact.html']").forEach(function (link) {
+    document.querySelectorAll("a.golink[href*='contact.html'], a.golink[href*='pages/contact.html']").forEach(function (link) {
       link.addEventListener("click", function (event) { var row = matchItemFromElement(link); if (!row) return; event.preventDefault(); selectItem(row, collectSearchContext()); });
     });
     var form = document.querySelector("form.quote");
