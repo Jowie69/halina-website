@@ -189,22 +189,19 @@ form.quote input,form.quote select,form.quote textarea{width:100%;border:1.5px s
 form.quote input:focus,form.quote textarea:focus{outline:2px solid var(--rose);background:#fff}
 
 /* ---------- footer ---------- */
-footer{background:linear-gradient(160deg,var(--navy) 0%,#0C0E17 90%);color:#E1E4EA;margin-top:56px}
+footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6;margin-top:56px}
 .foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:30px;padding-top:52px;padding-bottom:36px}
 .fbrand{display:flex;align-items:center;gap:11px;margin-bottom:14px}
 .fbrand .mark{width:44px;height:44px;object-fit:contain}
 .fbrand b{font-size:20px;color:#fff;display:block;line-height:1.05}
 .fbrand small{display:block;font-family:var(--script);font-style:italic;color:var(--gold);font-size:13px}
-.foot p{font-size:14px;opacity:.85;margin-bottom:16px}
+.foot p{font-size:14px;color:rgba(255,255,255,.85);margin-bottom:16px}
 .foot h4{color:#fff;font-size:15.5px;margin-bottom:12px;letter-spacing:.4px}
-.foot a{display:block;padding:4px 0;font-size:14.5px;opacity:.88}
+.foot a{display:block;padding:4px 0;font-size:14.5px;color:rgba(255,255,255,.88)}
 .foot a:hover{opacity:1;color:var(--gold)}
-.badge-award{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:10px 14px;border-radius:12px;max-width:280px}
-.badge-award b{display:block;color:#fff;font-size:13.5px}
-.badge-award small{font-size:12px;opacity:.8}
-.contact div{display:flex;gap:9px;align-items:flex-start;padding:4px 0;font-size:14px;opacity:.9}
+.contact div{display:flex;gap:9px;align-items:flex-start;padding:4px 0;font-size:14px;color:rgba(255,255,255,.9)}
 .contact svg{width:15px;height:15px;fill:var(--gold);flex:0 0 15px;margin-top:3px}
-.footbar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.14);padding-top:16px;padding-bottom:16px;font-size:13px;opacity:.8}
+.footbar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.15);padding-top:16px;padding-bottom:16px;font-size:13px;color:rgba(255,255,255,.8)}
 
 /* ---------- Navbar Call & Email Icon Buttons ---------- */
 .nav-icon-btn {

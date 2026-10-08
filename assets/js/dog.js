@@ -139,13 +139,7 @@
       id: 'reviews',
       tags: ['review', 'reviews', 'rating', 'trustpilot', 'testimonial', 'feedback', 'award', 'awards', 'reputation'],
       weight: 1.1,
-      answer: 'We’re rated <b>4.9 out of 5</b> on Trustpilot from <b>2,300+ verified reviews</b>. ⭐<br><br>We’re also a finalist for <b>Best Travel Company to Southeast Asia</b> at the British Travel Awards 2026 — votes very welcome!'
-    },
-    {
-      id: 'vote',
-      tags: ['vote', 'voting', 'british travel awards', 'awards 2026', 'prize draw'],
-      weight: 1.25,
-      answer: 'Salamat for asking! 🏆 We’re a finalist for <b>Best Travel Company to Southeast Asia</b> at the British Travel Awards 2026.<br><br>Hit <b>Vote for us</b> at the top of the page — you’ll also be entered into the voters’ prize draw.'
+      answer: 'We’re rated <b>4.9 out of 5</b> on Trustpilot from <b>2,300+ verified reviews</b>. ⭐ Safe, protected, and trusted by the UK Filipino community!'
     },
     {
       id: 'buddy',
