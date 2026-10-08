@@ -54,7 +54,7 @@
 }
 
 .mascot-layer.reactions {
-  background-image: url('../img/owl-reactions.webp');
+  /* Loaded on first reaction by mascot.js. Most visitors never need this sprite. */
 }
 
 .mascot-speech-bubble {

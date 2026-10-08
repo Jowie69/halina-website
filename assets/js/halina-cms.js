@@ -273,11 +273,25 @@
     document.querySelectorAll(".card").forEach(function (card) { var row = matchItemFromElement(card); if (!row) return; var price = card.querySelector(".price b"); if (price) price.textContent = money(row); });
   }
 
+  function loadSupabase() {
+    if (window.supabase && window.supabase.createClient) return Promise.resolve(true);
+    return new Promise(function (resolve) {
+      var script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js";
+      script.crossOrigin = "anonymous";
+      script.onload = function () { resolve(true); };
+      script.onerror = function () { resolve(false); };
+      document.head.appendChild(script);
+    });
+  }
   function connect() {
-    if (!config.url || !config.publishableKey || !window.supabase || !window.supabase.createClient) return Promise.resolve();
-    try { client = window.supabase.createClient(config.url, config.publishableKey, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } }); }
-    catch (error) { return Promise.resolve(); }
-    return Promise.all([refreshCatalog(), refreshContacts(), refreshContent(), refreshSettings()]).then(subscribeRealtime).catch(function () { /* Static fallbacks remain usable. */ });
+    if (!config.url || !config.publishableKey) return Promise.resolve();
+    return loadSupabase().then(function (loaded) {
+      if (!loaded || !window.supabase || !window.supabase.createClient) return;
+      try { client = window.supabase.createClient(config.url, config.publishableKey, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } }); }
+      catch (error) { return; }
+      return Promise.all([refreshCatalog(), refreshContacts(), refreshContent(), refreshSettings()]).then(subscribeRealtime).catch(function () { /* Static fallbacks remain usable. */ });
+    });
   }
   function refreshCatalog() { return client.from("catalog_items").select("*").eq("is_active", true).order("sort_order").then(function (result) { if (result.error) throw result.error; catalog = result.data || []; syncStaticCards(); }); }
   function refreshContacts() { return client.from("site_contacts").select("*").eq("is_active", true).order("sort_order").then(function (result) { if (result.error) throw result.error; contacts = result.data || []; applyContacts(); }); }
@@ -299,4 +313,3 @@
   window.HalinaCMS = { openCatalog: openCatalog, selectItem: selectItem, close: closeModal, getCatalog: function () { return catalog.slice(); } };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
-

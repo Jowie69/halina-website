@@ -43,7 +43,7 @@
   }
 
   function capable() {
-    return !motionOff() && hasWebGL();
+    return !motionOff() && !lowPower() && hasWebGL();
   }
 
   /* ---------------- ambient hero / promo layer ---------------- */
@@ -69,8 +69,20 @@
      In-between tab changes bypass the preloader completely for instant loading. */
   function bootIntro(overrideOpts) {
     var opts = Object.assign({
-      force: false
+      force: false,
+      isFast: true
     }, overrideOpts || {});
+
+    // The first view should be useful immediately; the full animation remains
+    // available from the explicit “Replay Intro” control.
+    if (opts.skip) {
+      document.documentElement.classList.remove('intro-lock');
+      var skippedIntro = document.getElementById('intro');
+      if (skippedIntro) skippedIntro.remove();
+      body.setAttribute('data-intro', 'done');
+      afterLoad(bootAmbient);
+      return Promise.resolve();
+    }
 
     var alreadyPlayed = false;
     try {
@@ -113,11 +125,11 @@
   }
 
   window.replayIntro = function () {
-    return bootIntro({ force: true });
+    return bootIntro({ force: true, isFast: false });
   };
   window.runIntro = bootIntro;
 
-  bootIntro();
+  bootIntro({ skip: true });
 })();
 
 /* ============================================================
@@ -455,4 +467,3 @@
 
   tryAutoplay();
 })();
-

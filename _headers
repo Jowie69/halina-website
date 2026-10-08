@@ -1,0 +1,10 @@
+# Keep HTML fresh so deploys update immediately.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Cache static assets between visits while allowing deploys to refresh them.
+/assets/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/favicon.ico
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

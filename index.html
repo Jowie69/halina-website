@@ -3,27 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" as="image" href="assets/img/logo.webp" fetchpriority="high">
-<link rel="preload" as="image" href="assets/img/owl-directions.webp">
+<link rel="preload" as="image" href="assets/img/hero-bg.webp" media="(min-width: 601px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-bg-mobile.webp" media="(max-width: 600px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/owl-directions.webp" fetchpriority="low">
+
 <meta name="theme-color" content="#E4002B">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/css/fx.css">
 <link rel="stylesheet" href="assets/css/intro.css">
 <link rel="stylesheet" href="assets/css/mascot.css">
 <link rel="stylesheet" href="assets/css/enquiry.css">
-<link rel="preload" as="fetch" href="assets/models/floatplane.glb" crossorigin>
-<link rel="preload" as="image" href="assets/img/cloud2.webp">
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.169.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.169.0/examples/jsm/"
-  }
-}
-</script>
 <title>Halina Travels | Filipino Travel Agency in London</title>
 <meta name="description" content="Halina Travels — London's Filipino travel agency. Flights home, island packages, balikbayan support.">
 <style>
@@ -145,6 +138,7 @@ section{position:relative}
 
 /* ---------- hero ---------- */
 .hero{position:relative;color:#fff;overflow:hidden;background:var(--deep);border-radius:0 0 40px 40px}
+.hero .hero-backdrop{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none}
 .hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(40,8,38,.78) 0%,rgba(40,8,38,.35) 45%,rgba(40,8,38,.15) 100%)}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr .9fr;gap:40px;align-items:center;padding-top:84px;padding-bottom:150px}
@@ -553,9 +547,10 @@ footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6}
 
 <!-- ===== hero ===== -->
 <section class="hero" id="home">
-  <video class="bg" id="heroVideo" poster="assets/img/hero-bg.webp" autoplay muted loop playsinline preload="none" aria-hidden="true">
-    <source src="intro-clip.mp4" type="video/mp4">
-  </video>
+  <picture class="hero-backdrop" aria-hidden="true">
+    <source media="(max-width: 600px)" srcset="assets/img/hero-bg-mobile.webp">
+    <img class="bg" src="assets/img/hero-bg.webp" alt="" width="1376" height="768" fetchpriority="high">
+  </picture>
   <div class="veil"></div>
   <div class="wrap">
     <div>
@@ -896,13 +891,6 @@ footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6}
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     || document.body.getAttribute('data-motion') === 'off';
 
-  /* ----- calmer hero video ----- */
-  var heroVideo = document.getElementById('heroVideo');
-  if (heroVideo){
-    heroVideo.defaultPlaybackRate = 0.7;
-    heroVideo.playbackRate = 0.7;
-  }
-
   /* ----- scroll progress + header + back-to-top ----- */
   var prog = document.getElementById('progress'),
       header = document.getElementById('header'),
@@ -1053,7 +1041,6 @@ footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6}
   }
 })();
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.4/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
 <script defer src="assets/js/halina-config.js"></script>
 <script defer src="assets/js/halina-cms.js"></script>
 </body>

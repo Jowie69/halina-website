@@ -9,6 +9,7 @@
     'left', 'center', 'right',
     'down-left', 'down', 'down-right'
   ];
+  var REACTION_SPRITE = new URL('../img/owl-reactions.webp', document.currentScript.src).href;
 
   var REACTIONS = [
     'blink', 'heart', 'sparkle',
@@ -239,6 +240,11 @@
     function setReaction(react) {
       currentReaction = react;
       if (react) {
+        // Keep the second 156 KB sprite off the critical request path until Ollie is used.
+        if (!reactLayer.dataset.spriteLoaded) {
+          reactLayer.style.backgroundImage = 'url("' + REACTION_SPRITE + '")';
+          reactLayer.dataset.spriteLoaded = 'true';
+        }
         var idx = REACTIONS.indexOf(react);
         if (idx !== -1) reactLayer.style.backgroundPosition = getCellPosition(idx);
         reactLayer.style.opacity = '1';
