@@ -189,7 +189,7 @@ form.quote input,form.quote select,form.quote textarea{width:100%;border:1.5px s
 form.quote input:focus,form.quote textarea:focus{outline:2px solid var(--rose);background:#fff}
 
 /* ---------- footer ---------- */
-footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6;margin-top:56px}
+footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6;margin-top:0}
 .foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:30px;padding-top:52px;padding-bottom:36px}
 .fbrand{display:flex;align-items:center;gap:11px;margin-bottom:14px}
 .fbrand .mark{width:44px;height:44px;object-fit:contain}

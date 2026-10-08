@@ -85,7 +85,7 @@
       id: 'why',
       tags: ['why', 'why book', 'why choose', 'better', 'benefit', 'benefits', 'advantage', 'different', 'reason'],
       weight: 1.0,
-      answer: 'Because we combine exclusive agency fares with genuine Filipino hospitality. 🧡<br><br>Our specialists compare <b>24+ airlines</b>, can hold seats while you decide, and support you before, during and after your trip — in English, Tagalog or Bisaya.'
+      answer: 'Because we combine exclusive agency fares with genuine Filipino hospitality. 🧡<br><br>Our specialists compare <b>top global airlines</b>, can hold seats while you decide, and support you before, during and after your trip — in English, Tagalog or Bisaya.'
     },
     {
       id: 'airlines',
@@ -139,7 +139,7 @@
       id: 'reviews',
       tags: ['review', 'reviews', 'rating', 'trustpilot', 'testimonial', 'feedback', 'award', 'awards', 'reputation'],
       weight: 1.1,
-      answer: 'We’re rated <b>4.9 out of 5</b> on Trustpilot from <b>2,300+ verified reviews</b>. ⭐ Safe, protected, and trusted by the UK Filipino community!'
+      answer: 'We are highly recommended by our travellers! ⭐ Safe, protected, and trusted by the UK Filipino community!'
     },
     {
       id: 'buddy',
