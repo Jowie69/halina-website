@@ -72,7 +72,7 @@ export async function runIntro(opts={}){
   if (old) old.remove();
   const overlay=document.createElement('div');overlay.id='intro';overlay.setAttribute('role','presentation');
   if(opts.isFast) overlay.classList.add('fast');
-  overlay.innerHTML=`<div class="intro-sky"></div><canvas class="intro-canvas"></canvas><div class="intro-fg"><img class="intro-cloud c1" src="${CLOUD_B}" alt=""><img class="intro-cloud c2" src="${CLOUD_A}" alt=""><img class="intro-cloud c3" src="${CLOUD_B}" alt=""></div><div class="intro-word"><div class="intro-name">Halina Travels</div><div class="intro-tag">Halina, tara na sa Pilipinas!</div></div><button class="intro-skip" type="button">Skip intro</button>`;
+  overlay.innerHTML=`<div class="intro-sky"></div><canvas class="intro-canvas"></canvas><div class="intro-fg"><img class="intro-cloud c1" src="${CLOUD_B}" alt=""><img class="intro-cloud c2" src="${CLOUD_A}" alt=""><img class="intro-cloud c3" src="${CLOUD_B}" alt=""></div><div class="intro-word"><div class="intro-name">Halina Travels</div><div class="intro-tag">Halina, tara na sa Pilipinas!</div></div>`;
   document.body.appendChild(overlay);document.documentElement.classList.add('intro-lock');
   const canvas=overlay.querySelector('canvas'),gl=canvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false});
   if(!gl)throw Error('WebGL unavailable');
@@ -83,7 +83,6 @@ export async function runIntro(opts={}){
   const finishTimeout=opts.isFast?250:850;
   const resize=()=>{const d=Math.min(devicePixelRatio||1,1.5),w=innerWidth,h=innerHeight;if(canvas.width!==w*d||canvas.height!==h*d){canvas.width=w*d;canvas.height=h*d;canvas.style.width=w+'px';canvas.style.height=h+'px';gl.viewport(0,0,canvas.width,canvas.height)}};resize();addEventListener('resize',resize,{passive:true});
   const finish=()=>{if(finished)return;finished=true;overlay.classList.add('done');document.documentElement.classList.remove('intro-lock');setTimeout(()=>{cancelAnimationFrame(raf);overlay.remove()},finishTimeout)};
-  overlay.querySelector('.intro-skip').onclick=finish;addEventListener('keydown',e=>{if(e.key==='Escape')finish()},{once:true});
   try{mesh=await loadGLB(gl,MODEL)}catch(e){overlay.remove();document.documentElement.classList.remove('intro-lock');throw e}
   document.body.setAttribute('data-intro-plane','ready');overlay.classList.add('live');start=performance.now();
   gl.useProgram(p);bind(gl,p,L.pos,mesh.position);bind(gl,p,L.normal,mesh.normal);bind(gl,p,L.uv,mesh.uv);bind(gl,p,L.color,mesh.color);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,mesh.indices.buffer);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,mesh.texture);gl.uniform1i(L.tex,0);gl.enable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);

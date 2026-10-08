@@ -50,11 +50,11 @@
 }
 
 .mascot-layer.directions {
-  background-image: url('../../public/owl-directions.webp');
+  background-image: url('../img/owl-directions.webp');
 }
 
 .mascot-layer.reactions {
-  background-image: url('../../public/owl-reactions.webp');
+  background-image: url('../img/owl-reactions.webp');
 }
 
 .mascot-speech-bubble {

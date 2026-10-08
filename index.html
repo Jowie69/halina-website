@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="halina-logo.png" type="image/png">
-<link rel="apple-touch-icon" href="halina-logo.png">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/img/logo.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/owl-directions.webp">
 <meta name="theme-color" content="#E4002B">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/css/fx.css">
@@ -508,7 +511,7 @@ footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6}
 <header id="header">
   <div class="wrap nav">
     <a class="brand" href="#home">
-      <img src="halina-logo.png" alt="Halina Travels Logo" class="mark" fetchpriority="high" decoding="async">
+      <img src="assets/img/logo.webp" alt="Halina Travels Logo" class="mark" width="36" height="36" fetchpriority="high" decoding="async">
       <span><b>Halina Travels</b><small>Halina, tara na sa Pilipinas!</small></span>
     </a>
     <nav class="menu" id="menu">
@@ -550,7 +553,7 @@ footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6}
 
 <!-- ===== hero ===== -->
 <section class="hero" id="home">
-  <video class="bg" id="heroVideo" autoplay muted loop playsinline preload="none" aria-hidden="true">
+  <video class="bg" id="heroVideo" poster="assets/img/hero-bg.webp" autoplay muted loop playsinline preload="none" aria-hidden="true">
     <source src="intro-clip.mp4" type="video/mp4">
   </video>
   <div class="veil"></div>
@@ -658,14 +661,14 @@ footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6}
       </div>
     </div>
     <div class="offers-grid">
-      <div class="offer reveal"><div class="ph"><span class="tag">Hot deal</span><img loading="lazy" decoding="async" src="assets/img/img-05-58d168bc24.webp" alt="Manila at sunset"></div><div class="body"><div><div class="to">Flight to</div><b>Manila</b></div><div class="price"><small>Starting from</small><b>£479</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
-      <div class="offer reveal d1"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-06-fac233ddf8.webp" alt="Kawasan Falls, Cebu"></div><div class="body"><div><div class="to">Flight to</div><b>Cebu</b></div><div class="price"><small>Starting from</small><b>£651</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
-      <div class="offer reveal d2"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-07-c3155d8625.webp" alt="Boracay beach aerial"></div><div class="body"><div><div class="to">Flight to</div><b>Boracay</b></div><div class="price"><small>Starting from</small><b>£749</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
-      <div class="offer reveal d3"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-08-6c49b88a68.webp" alt="El Nido lagoon, Palawan"></div><div class="body"><div><div class="to">Flight to</div><b>Palawan</b></div><div class="price"><small>Starting from</small><b>£799</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
-      <div class="offer reveal"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-09-95e53a2c5c.webp" alt="Chocolate Hills, Bohol"></div><div class="body"><div><div class="to">Flight to</div><b>Bohol</b></div><div class="price"><small>Starting from</small><b>£759</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
-      <div class="offer reveal d1"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-10-989db0f4ef.webp" alt="Baguio mountains"></div><div class="body"><div><div class="to">Flight to</div><b>Baguio</b></div><div class="price"><small>Starting from</small><b>£899</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
-      <div class="offer reveal d2"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-11-584de6ca5d.webp" alt="Davao coastline"></div><div class="body"><div><div class="to">Flight to</div><b>Davao</b></div><div class="price"><small>Starting from</small><b>£909</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
-      <div class="offer reveal d3"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-12-c02e71a201.webp" alt="Cloud 9 boardwalk, Siargao"></div><div class="body"><div><div class="to">Flight to</div><b>Siargao</b></div><div class="price"><small>Starting from</small><b>£956</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
+      <div class="offer reveal"><div class="ph"><span class="tag">Hot deal</span><img loading="lazy" decoding="async" src="assets/img/img-05-58d168bc24.webp" alt="Manila at sunset" width="720" height="305"></div><div class="body"><div><div class="to">Flight to</div><b>Manila</b></div><div class="price"><small>Starting from</small><b>£479</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
+      <div class="offer reveal d1"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-06-fac233ddf8.webp" alt="Kawasan Falls, Cebu" width="720" height="401"></div><div class="body"><div><div class="to">Flight to</div><b>Cebu</b></div><div class="price"><small>Starting from</small><b>£651</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
+      <div class="offer reveal d2"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-07-c3155d8625.webp" alt="Boracay beach aerial" width="720" height="401"></div><div class="body"><div><div class="to">Flight to</div><b>Boracay</b></div><div class="price"><small>Starting from</small><b>£749</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
+      <div class="offer reveal d3"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-08-6c49b88a68.webp" alt="El Nido lagoon, Palawan" width="720" height="305"></div><div class="body"><div><div class="to">Flight to</div><b>Palawan</b></div><div class="price"><small>Starting from</small><b>£799</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
+      <div class="offer reveal"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-09-95e53a2c5c.webp" alt="Chocolate Hills, Bohol" width="720" height="392"></div><div class="body"><div><div class="to">Flight to</div><b>Bohol</b></div><div class="price"><small>Starting from</small><b>£759</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
+      <div class="offer reveal d1"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-10-989db0f4ef.webp" alt="Baguio mountains" width="720" height="305"></div><div class="body"><div><div class="to">Flight to</div><b>Baguio</b></div><div class="price"><small>Starting from</small><b>£899</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
+      <div class="offer reveal d2"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-11-584de6ca5d.webp" alt="Davao coastline" width="720" height="401"></div><div class="body"><div><div class="to">Flight to</div><b>Davao</b></div><div class="price"><small>Starting from</small><b>£909</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
+      <div class="offer reveal d3"><div class="ph"><img loading="lazy" decoding="async" src="assets/img/img-12-c02e71a201.webp" alt="Cloud 9 boardwalk, Siargao" width="720" height="401"></div><div class="body"><div><div class="to">Flight to</div><b>Siargao</b></div><div class="price"><small>Starting from</small><b>£956</b></div><span class="go"><svg viewBox="0 0 24 24"><path d="M8.6 4.6L15.9 12l-7.3 7.4L10 21l9-9-9-9z"/></svg></span></div></div>
     </div>
     <div class="seemore reveal"><button class="btn btn-maroon" data-toast="All 40+ route deals would open here.">See More Deals</button></div>
   </div>
@@ -685,13 +688,13 @@ footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6}
       </div>
     </div>
     <div class="track reveal" id="dTrack">
-      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-05-58d168bc24.webp" alt="Manila"><div class="grad"></div><div class="info"><small>Flight to</small><b>Manila</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
-      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-06-fac233ddf8.webp" alt="Cebu"><div class="grad"></div><div class="info"><small>Flight to</small><b>Cebu</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
-      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-08-6c49b88a68.webp" alt="Palawan"><div class="grad"></div><div class="info"><small>Flight to</small><b>Palawan</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
-      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-07-c3155d8625.webp" alt="Boracay"><div class="grad"></div><div class="info"><small>Flight to</small><b>Boracay</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
-      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-09-95e53a2c5c.webp" alt="Bohol"><div class="grad"></div><div class="info"><small>Flight to</small><b>Bohol</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
-      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-12-c02e71a201.webp" alt="Siargao"><div class="grad"></div><div class="info"><small>Flight to</small><b>Siargao</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
-      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-11-584de6ca5d.webp" alt="Davao"><div class="grad"></div><div class="info"><small>Flight to</small><b>Davao</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
+      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-05-58d168bc24.webp" alt="Manila" width="720" height="305"><div class="grad"></div><div class="info"><small>Flight to</small><b>Manila</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
+      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-06-fac233ddf8.webp" alt="Cebu" width="720" height="401"><div class="grad"></div><div class="info"><small>Flight to</small><b>Cebu</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
+      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-08-6c49b88a68.webp" alt="Palawan" width="720" height="305"><div class="grad"></div><div class="info"><small>Flight to</small><b>Palawan</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
+      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-07-c3155d8625.webp" alt="Boracay" width="720" height="401"><div class="grad"></div><div class="info"><small>Flight to</small><b>Boracay</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
+      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-09-95e53a2c5c.webp" alt="Bohol" width="720" height="392"><div class="grad"></div><div class="info"><small>Flight to</small><b>Bohol</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
+      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-12-c02e71a201.webp" alt="Siargao" width="720" height="401"><div class="grad"></div><div class="info"><small>Flight to</small><b>Siargao</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
+      <div class="dcard"><img loading="lazy" decoding="async" src="assets/img/img-11-584de6ca5d.webp" alt="Davao" width="720" height="401"><div class="grad"></div><div class="info"><small>Flight to</small><b>Davao</b><a class="vf" href="#search">VIEW FLIGHTS</a></div></div>
     </div>
     <div class="dots" id="dDots"></div>
   </div>
@@ -850,7 +853,7 @@ footer{background:linear-gradient(160deg,#7A0016 0%,#3D000B 100%);color:#F7ECE6}
   <div class="wrap foot">
     <div>
       <div class="fbrand">
-        <img src="halina-logo.png" alt="Halina Travels Logo" class="mark">
+        <img src="assets/img/logo.webp" alt="Halina Travels Logo" class="mark" width="36" height="36" loading="lazy" decoding="async">
         <span><b>Halina Travels</b><small>Halina, tara na sa Pilipinas!</small></span>
       </div>
       <p>London's Filipino travel studio — flights home, island packages and balikbayan support, crafted with puso since 2011.</p>

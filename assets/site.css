@@ -85,9 +85,9 @@ section{position:relative}
 .phero.phero-post-independence::after{background-image:url("img/img-12-c02e71a201.webp")}
 .phero.phero-post-gems::after{background-image:url("img/img-11-584de6ca5d.webp")}
 .phero.phero-post-london::after{background-image:url("img/img-01-837f0a23dd.webp")}
-.phero.phero-post-spring::after{background-image:url("img/hero-bg.jpg")}
+.phero.phero-post-spring::after{background-image:url("img/hero-bg.webp")}
 .phero.phero-post-f1::after{background-image:url("img/img-04-27edf2c4b9.webp")}
-.phero.phero-post-top20::after{background-image:url("img/hero-pattern.jpg")}
+.phero.phero-post-top20::after{background-image:url("img/hero-pattern.webp")}
 .phero > *, .ribbon > *, .dest > *, .why > *, .ctabox > *, .about .panel > *, .cta .panel > *{position:relative;z-index:2}
 .phero .wrap{position:relative;padding-top:58px;padding-bottom:58px;z-index:2;max-width:860px}
 .crumb{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
